@@ -1,11 +1,11 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cybersecurity Portfolio</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cybersecurity Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
         tailwind.config = {
             theme: {
                 extend: {
@@ -13,13 +13,19 @@
                         'cyber-green': '#00ff88',
                         'dark-green': '#0d4f3c',
                         'light-green': '#e8f5e8',
-                        'matrix-green': '#00ff41'
+                        'matrix-green': '#00ff41',
+                        'hacker-black': '#0a0a0a',
+                        'dark-gray': '#1a1a1a'
                     }
                 }
             }
         }
     </script>
-    <style>
+  <style>
+        body {
+            box-sizing: border-box;
+        }
+        
         .typing-animation {
             border-right: 2px solid #00ff88;
             animation: blink 1s infinite;
@@ -57,513 +63,479 @@
             from { width: 0; }
         }
     </style>
-</head>
-<body class="bg-white text-gray-800 font-sans">
-    <!-- Navigation -->
-    <nav class="bg-white shadow-lg fixed w-full top-0 z-50 border-b-2 border-cyber-green">
-        <div class="max-w-6xl mx-auto px-4">
-            <div class="flex justify-between items-center py-4">
-                <div class="text-2xl font-bold gradient-text">CyberSec Portfolio</div>
-                <div class="hidden md:flex space-x-8">
-                    <a href="#about" class="text-dark-green hover:text-cyber-green transition-colors">About</a>
-                    <a href="#education" class="text-dark-green hover:text-cyber-green transition-colors">Education</a>
-                    <a href="#projects" class="text-dark-green hover:text-cyber-green transition-colors">Projects</a>
-                    <a href="#certifications" class="text-dark-green hover:text-cyber-green transition-colors">Certifications</a>
-                    <a href="#contact" class="text-dark-green hover:text-cyber-green transition-colors">Contact</a>
-                </div>
-                <button id="mobile-menu-btn" class="md:hidden text-dark-green">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                    </svg>
-                </button>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg fixed w-full top-16 z-40 border-b border-gray-200">
-        <div class="px-4 py-2 space-y-2">
-            <a href="#about" class="block py-2 text-dark-green hover:text-cyber-green">About</a>
-            <a href="#education" class="block py-2 text-dark-green hover:text-cyber-green">Education</a>
-            <a href="#projects" class="block py-2 text-dark-green hover:text-cyber-green">Projects</a>
-            <a href="#certifications" class="block py-2 text-dark-green hover:text-cyber-green">Certifications</a>
-            <a href="#contact" class="block py-2 text-dark-green hover:text-cyber-green">Contact</a>
-        </div>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="/_sdk/element_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="bg-white text-gray-800 font-sans"><!-- Navigation -->
+  <nav class="bg-white shadow-lg fixed w-full top-0 z-50 border-b-4 border-cyber-green">
+   <div class="max-w-6xl mx-auto px-4">
+    <div class="flex justify-between items-center py-4">
+     <div class="text-2xl font-bold text-dark-green">
+      CyberSec Portfolio
+     </div>
+     <div class="hidden md:flex space-x-8"><a href="#about" class="text-dark-green hover:text-cyber-green transition-colors font-medium">About</a> <a href="#certifications" class="text-dark-green hover:text-cyber-green transition-colors font-medium">Certifications</a> <a href="#skills" class="text-dark-green hover:text-cyber-green transition-colors font-medium">Skills</a> <a href="#education" class="text-dark-green hover:text-cyber-green transition-colors font-medium">Education</a> <a href="#experience" class="text-dark-green hover:text-cyber-green transition-colors font-medium">Experience</a> <a href="#projects" class="text-dark-green hover:text-cyber-green transition-colors font-medium">Projects</a> <a href="#contact" class="text-dark-green hover:text-cyber-green transition-colors font-medium">Contact</a>
+     </div><button id="mobile-menu-btn" class="md:hidden text-dark-green">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+      </svg></button>
     </div>
-
-    <!-- Hero Section -->
-    <section class="pt-20 pb-16 bg-gradient-to-br from-light-green to-white">
-        <div class="max-w-6xl mx-auto px-4 text-center">
-            <div class="mb-8">
-                <div class="w-32 h-32 mx-auto mb-6 bg-gradient-to-br from-cyber-green to-dark-green rounded-full flex items-center justify-center">
-                   <img src="profile pic.jpeg" alt="Custom Icon" style="width: 300px; height: 180px; border-radius: 70%; object-fit: cover; padding-top: 20px;">
-                </div>
-                <h1 class="text-5xl md:text-6xl font-bold mb-4">
-                    <span class="gradient-text">Cybersecurity</span>
-                    <br>
-                    <span class="text-dark-green typing-animation">Professional</span>
-                </h1>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-                    Motivated and detail-oriented cybersecurity graduate student with expertise in networking, digital forensics, and ethical hacking. Passionate about solving security problems in both offensive and defensive contexts.
-                </p>
-            </div>
-            <div class="flex flex-wrap justify-center gap-4">
-                <button onclick="scrollToSection('projects')" class="bg-cyber-green text-white px-8 py-3 rounded-lg font-semibold hover:bg-opacity-90 transition-all transform hover:scale-105">
-                    View Projects
-                </button>
-                <button onclick="scrollToSection('contact')" class="border-2 border-cyber-green text-cyber-green px-8 py-3 rounded-lg font-semibold hover:bg-cyber-green hover:text-white transition-all">
-                    Get In Touch
-                </button>
-            </div>
+   </div>
+  </nav><!-- Mobile Menu -->
+  <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg fixed w-full top-16 z-40 border-b-4 border-cyber-green">
+   <div class="px-4 py-2 space-y-2"><a href="#about" class="block py-2 text-dark-green hover:text-cyber-green font-medium">About</a> <a href="#certifications" class="block py-2 text-dark-green hover:text-cyber-green font-medium">Certifications</a> <a href="#skills" class="block py-2 text-dark-green hover:text-cyber-green font-medium">Skills</a> <a href="#education" class="block py-2 text-dark-green hover:text-cyber-green font-medium">Education</a> <a href="#experience" class="block py-2 text-dark-green hover:text-cyber-green font-medium">Experience</a> <a href="#projects" class="block py-2 text-dark-green hover:text-cyber-green font-medium">Projects</a> <a href="#contact" class="block py-2 text-dark-green hover:text-cyber-green font-medium">Contact</a>
+   </div>
+  </div><!-- Hero Section -->
+  <section class="pt-20 pb-16 bg-gradient-to-br from-light-green to-white">
+   <div class="max-w-6xl mx-auto px-4 text-center">
+    <div class="mb-8">
+     </div>
+     <div class="w-32 h-32 mx-auto mb-6 bg-gradient-to-br from-cyber-green to-dark-green rounded-full overflow-hidden flex items-center justify-center">
+  <img src="profile pic.jpeg" alt="Profile Photo" class="w-full h-full object-cover object-center transform scale-150 translate-y-[25px]">
+</div>
+     <h1 class="text-5xl md:text-6xl font-bold mb-4"><span class="gradient-text">Cybersecurity</span> <br><span class="text-dark-green typing-animation">Professional</span></h1>
+     <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed text-justify">MSc Cybersecurity candidate (GPA 4.0) with hands-on experience in log analysis, penetration testing, and network operations. Certified in CompTIA Security+, Cisco CCNA and CCST, and PJPT (Active Directory). Proven ability to learn and master new technologies quickly through labs, projects, and internships. Highly motivated to grow as a Security Analyst and contribute to enterprise security teams with dedication and results.</p>
+    </div>
+    <div class="flex flex-wrap justify-center gap-4"><button onclick="scrollToSection('projects')" class="bg-cyber-green text-white px-8 py-3 rounded-lg font-semibold hover:bg-opacity-90 transition-all transform hover:scale-105"> View Projects </button> <button onclick="scrollToSection('contact')" class="border-2 border-cyber-green text-cyber-green px-8 py-3 rounded-lg font-semibold hover:bg-cyber-green hover:text-white transition-all"> Get In Touch </button>
+    </div>
+   </div>
+  </section><!-- About Section -->
+  <section id="about" class="py-16 bg-white">
+   <div class="max-w-6xl mx-auto px-4">
+    <h2 class="text-4xl font-bold text-center mb-12 gradient-text">About Me</h2>
+    <div class="max-w-4xl mx-auto">
+     <p class="text-lg text-gray-700 mb-6 leading-relaxed text-justify">I'm a cybersecurity graduate student pursuing my Master's degree with a perfect 4.0 GPA. My journey in cybersecurity is driven by a passion for both offensive and defensive security practices. With hands-on experience in log analysis, penetration testing, and network operations, I bring a practical approach to securing digital environments.</p>
+     <p class="text-lg text-gray-700 leading-relaxed text-justify">I hold multiple industry certifications including CompTIA Security+, Cisco CCNA, and TCM Security's PJPT focused on Active Directory environments. My technical expertise spans across security tools like Splunk, Metasploit, and Burp Suite, combined with proficiency in multiple programming languages. I'm committed to continuous learning through CTF challenges, HackTheBox labs, and real-world security projects.</p>
+    </div>
+   </div>
+  </section><!-- Certifications Section -->
+  <section id="certifications" class="py-16 bg-light-green">
+   <div class="max-w-6xl mx-auto px-4">
+    <h2 class="text-4xl font-bold text-center mb-12 gradient-text">Certifications</h2>
+    <div class="grid md:grid-cols-2 lg:grid-cols-5 gap-6">
+     <div class="bg-white p-6 rounded-xl shadow-lg text-center card-hover">
+      <div class="w-16 h-16 bg-cyber-green rounded-full flex items-center justify-center mx-auto mb-4">
+       <svg class="w-8 h-8 text-white" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+       </svg>
+      </div>
+      <h4 class="font-bold text-dark-green text-lg mb-2">CompTIA Security+</h4>
+      <p class="text-xs text-gray-500 mb-3 hidden cert-id" data-cert="cert1">Candidate ID: COMP001022764373 <br> Code: S7WRD0PSTBF41Q5H</p><button onclick="toggleCredential('cert1')" class="bg-cyber-green text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-opacity-90 transition-all"> Verify </button>
+     </div>
+     <div class="bg-white p-6 rounded-xl shadow-lg text-center card-hover">
+      <div class="w-16 h-16 bg-dark-green rounded-full flex items-center justify-center mx-auto mb-4">
+       <svg class="w-8 h-8 text-white" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+       </svg>
+      </div>
+      <h4 class="font-bold text-dark-green text-lg mb-2">Cisco CCNA</h4>
+      <p class="text-xs text-gray-500 mb-3 hidden cert-id" data-cert="cert2">Verification number: 117c448cf44443a990667c125e<br>5b1030</p><button onclick="toggleCredential('cert2')" class="bg-dark-green text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-opacity-90 transition-all"> Verify </button>
+     </div>
+     <div class="bg-white p-6 rounded-xl shadow-lg text-center card-hover">
+      <div class="w-16 h-16 bg-cyber-green rounded-full flex items-center justify-center mx-auto mb-4">
+       <svg class="w-8 h-8 text-white" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+       </svg>
+      </div>
+      <h4 class="font-bold text-dark-green text-lg mb-2">TCM PJPT</h4>
+      <p class="text-xs text-gray-600 mb-1">Active Directory Pentesting</p>
+      <p class="text-xs text-gray-500 mb-3 hidden cert-id" data-cert="cert3">Certificate #:124242262</p><button onclick="toggleCredential('cert3')" class="bg-cyber-green text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-opacity-90 transition-all"> Verify </button>
+     </div>
+     <div class="bg-white p-6 rounded-xl shadow-lg text-center card-hover">
+      <div class="w-16 h-16 bg-dark-green rounded-full flex items-center justify-center mx-auto mb-4">
+       <svg class="w-8 h-8 text-white" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+       </svg>
+      </div>
+      <h4 class="font-bold text-dark-green text-lg mb-2">Cisco CCST</h4>
+      <p class="text-xs text-gray-500 mb-3 hidden cert-id" data-cert="cert4">Verification ID: xdhs-s4aK</p><button onclick="toggleCredential('cert4')" class="bg-dark-green text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-opacity-90 transition-all"> Verify </button>
+     </div>
+     <div class="bg-white p-6 rounded-xl shadow-lg text-center card-hover">
+      <div class="w-16 h-16 bg-cyber-green rounded-full flex items-center justify-center mx-auto mb-4">
+       <svg class="w-8 h-8 text-white" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+       </svg>
+      </div>
+      <h4 class="font-bold text-dark-green text-lg mb-2">Splunk</h4>
+      <p class="text-xs text-gray-500 mb-3 hidden cert-id" data-cert="cert5">ID: SPLK555666777</p><button onclick="toggleCredential('cert5')" class="bg-cyber-green text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-opacity-90 transition-all"> Verify </button>
+     </div>
+    </div>
+   </div>
+  </section><!-- Skills Section -->
+  <section id="skills" class="py-16 bg-white">
+   <div class="max-w-6xl mx-auto px-4">
+    <h2 class="text-4xl font-bold text-center mb-12 gradient-text">Skills &amp; Expertise</h2>
+    <div class="space-y-8"><!-- Programming Languages -->
+     <div class="bg-light-green p-8 rounded-xl">
+      <h3 class="text-2xl font-bold text-dark-green mb-6 flex items-center">
+       <svg class="w-8 h-8 mr-3 text-cyber-green" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+       </svg> Programming Languages</h3>
+      <div class="flex flex-wrap gap-3"><span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">C</span> <span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">Python</span> <span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">HTML</span> <span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">JavaScript</span> <span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">CSS</span> <span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">Bash</span> <span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">MySQL</span> <span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">PowerShell</span>
+      </div>
+     </div><!-- Software Tools -->
+     <div class="bg-light-green p-8 rounded-xl">
+      <h3 class="text-2xl font-bold text-dark-green mb-6 flex items-center">
+       <svg class="w-8 h-8 mr-3 text-cyber-green" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"></path>
+       </svg> Software Tools</h3>
+      <div class="flex flex-wrap gap-3"><span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">Wireshark</span> <span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">Linux</span> <span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">Nmap</span> <span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">Burp Suite</span> <span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">Splunk</span> <span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">Metasploit</span> <span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">Bloodhound</span> <span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">IDA Pro</span> <span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">Ansible</span> <span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">AWS</span> <span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">n8n</span>
+      </div>
+     </div><!-- Networking -->
+     <div class="bg-light-green p-8 rounded-xl">
+      <h3 class="text-2xl font-bold text-dark-green mb-6 flex items-center">
+       <svg class="w-8 h-8 mr-3 text-cyber-green" fill="currentColor" viewbox="0 0 20 20"><path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"></path>
+       </svg> Networking</h3>
+      <div class="flex flex-wrap gap-3"><span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">TCP/IP</span> <span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">DNS</span> <span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">DHCP</span> <span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">VPNs (OpenVPN, IPsec)</span> <span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">VLANs</span> <span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">Firewalls</span> <span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">Cisco Packet Tracer</span>
+      </div>
+     </div><!-- Operating Systems & Cloud -->
+     <div class="bg-light-green p-8 rounded-xl">
+      <h3 class="text-2xl font-bold text-dark-green mb-6 flex items-center">
+       <svg class="w-8 h-8 mr-3 text-cyber-green" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M3 5a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2h-2.22l.123.489.804.804A1 1 0 0113 18H7a1 1 0 01-.707-1.707l.804-.804L7.22 15H5a2 2 0 01-2-2V5zm5.771 7H5V5h10v7H8.771z" clip-rule="evenodd"></path>
+       </svg> Operating Systems &amp; Cloud</h3>
+      <div class="flex flex-wrap gap-3"><span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">Windows Server</span> <span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">Ubuntu Linux</span> <span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">Kali Linux</span> <span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">Active Directory</span> <span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">AWS Security</span>
+      </div>
+     </div><!-- Cybersecurity Practice -->
+     <div class="bg-light-green p-8 rounded-xl">
+      <h3 class="text-2xl font-bold text-dark-green mb-6 flex items-center">
+       <svg class="w-8 h-8 mr-3 text-cyber-green" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M18 8a6 6 0 01-7.743 5.743L10 14l-0.257-0.257A6 6 0 0118 8zM2 8a6 6 0 017.743-5.743L10 2l0.257 0.257A6 6 0 012 8zm8 2a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
+       </svg> Cybersecurity Practice</h3>
+      <div class="flex flex-wrap gap-3"><span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">Capture the Flag (CTF)</span> <span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">HackTheBox</span> <span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">Ethical Hacking Labs</span> <span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">Security Research</span>
+      </div>
+     </div><!-- Languages -->
+     <div class="bg-light-green p-8 rounded-xl">
+      <h3 class="text-2xl font-bold text-dark-green mb-6 flex items-center">
+       <svg class="w-8 h-8 mr-3 text-cyber-green" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M7 2a1 1 0 011 1v1h3a1 1 0 110 2H9.578a18.87 18.87 0 01-1.724 4.78c.29.354.596.696.914 1.026a1 1 0 11-1.44 1.389c-.188-.196-.373-.396-.554-.6a19.098 19.098 0 01-3.107 3.567 1 1 0 01-1.334-1.49 17.087 17.087 0 003.13-3.733 18.992 18.992 0 01-1.487-2.494 1 1 0 111.79-.89c.234.47.489.928.764 1.372.417-.934.752-1.913.997-2.927H3a1 1 0 110-2h3V3a1 1 0 011-1zm6 6a1 1 0 01.894.553l2.991 5.982a.869.869 0 01.02.037l.99 1.98a1 1 0 11-1.79.895L15.383 16h-4.764l-.724 1.447a1 1 0 11-1.788-.894l.99-1.98.019-.038 2.99-5.982A1 1 0 0113 8zm-1.382 6h2.764L13 11.236 11.618 14z" clip-rule="evenodd"></path>
+       </svg> Languages</h3>
+      <div class="flex flex-wrap gap-3"><span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">English</span> <span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">Italian</span> <span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">Telugu</span> <span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">Hindi</span> <span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">Tamil</span> <span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">Kannada</span>
+      </div>
+     </div>
+    </div>
+   </div>
+  </section><!-- Education Section -->
+  <section id="education" class="py-16 bg-light-green">
+   <div class="max-w-6xl mx-auto px-4">
+    <h2 class="text-4xl font-bold text-center mb-12 gradient-text">Education</h2>
+    <div class="grid md:grid-cols-2 gap-8">
+     <div class="bg-white p-8 rounded-xl shadow-lg card-hover">
+      <div class="flex items-center mb-4">
+       <div class="w-12 h-12 bg-cyber-green rounded-full flex items-center justify-center mr-4">
+        <svg class="w-6 h-6 text-white" fill="currentColor" viewbox="0 0 20 20"><path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"></path>
+        </svg>
+       </div>
+       <div>
+        <h3 class="text-xl font-bold text-dark-green">Saint Peter's University</h3>
+        <p class="text-gray-600">Jersey City, NJ</p>
+       </div>
+      </div>
+      <div class="mb-4">
+       <p class="text-lg font-semibold text-dark-green">MSc in Cybersecurity</p>
+       <p class="text-cyber-green font-bold text-xl">GPA: 4.0</p>
+       <p class="text-gray-600 font-medium">Feb 2024 - May 2025</p>
+      </div>
+      <div>
+       <p class="font-semibold text-dark-green mb-2">Relevant Coursework:</p>
+       <div class="flex flex-wrap gap-2"><span class="bg-cyber-green bg-opacity-20 text-dark-green px-3 py-1 rounded-full text-sm">Digital Forensics</span> <span class="bg-cyber-green bg-opacity-20 text-dark-green px-3 py-1 rounded-full text-sm">Ethical Hacking</span> <span class="bg-cyber-green bg-opacity-20 text-dark-green px-3 py-1 rounded-full text-sm">Blockchain</span>
+       </div>
+      </div>
+     </div>
+     <div class="bg-white p-8 rounded-xl shadow-lg card-hover">
+      <div class="flex items-center mb-4">
+       <div class="w-12 h-12 bg-dark-green rounded-full flex items-center justify-center mr-4">
+        <svg class="w-6 h-6 text-white" fill="currentColor" viewbox="0 0 20 20"><path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"></path>
+        </svg>
+       </div>
+       <div>
+        <h3 class="text-xl font-bold text-dark-green">Presidency University</h3>
+        <p class="text-gray-600">Bangalore, India</p>
+       </div>
+      </div>
+      <div class="mb-4">
+       <p class="text-lg font-semibold text-dark-green">BSc in Computer Science</p>
+       <p class="text-cyber-green font-bold text-xl">GPA: 3.6</p>
+       <p class="text-gray-600 font-medium">August 2018 - June 2023</p>
+      </div>
+      <div>
+       <p class="font-semibold text-dark-green mb-2">Relevant Coursework:</p>
+       <div class="flex flex-wrap gap-2"><span class="bg-dark-green bg-opacity-20 text-dark-green px-3 py-1 rounded-full text-sm">Data Structures &amp; Algorithms</span> <span class="bg-dark-green bg-opacity-20 text-dark-green px-3 py-1 rounded-full text-sm">Computer Programming</span> <span class="bg-dark-green bg-opacity-20 text-dark-green px-3 py-1 rounded-full text-sm">Operating Systems</span>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </section><!-- Work Experience Section -->
+  <section id="experience" class="py-16 bg-white">
+   <div class="max-w-6xl mx-auto px-4">
+    <h2 class="text-4xl font-bold text-center mb-12 gradient-text">Work Experience</h2>
+    <div class="bg-light-green p-8 rounded-xl shadow-lg">
+     <div class="flex items-start mb-6">
+      <div class="w-16 h-16 bg-cyber-green rounded-full flex items-center justify-center mr-6 flex-shrink-0">
+       <svg class="w-8 h-8 text-white" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clip-rule="evenodd"></path> <path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z"></path>
+       </svg>
+      </div>
+      <div class="flex-grow">
+       <h3 class="text-2xl font-bold text-dark-green mb-2">Cybersecurity Intern – Log Analysis with Splunk</h3>
+       <p class="text-cyber-green font-semibold text-lg mb-1">Saint Peter's University</p>
+       <p class="text-gray-600 mb-4">Jersey City, NJ, USA</p>
+       <ul class="space-y-3">
+        <li class="flex items-start">
+         <svg class="w-5 h-5 text-cyber-green mr-3 mt-1 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+         </svg><span class="text-gray-700">Analysed DDoS attack logs from multiple IPs attempting various user credentials across different resources</span></li>
+        <li class="flex items-start">
+         <svg class="w-5 h-5 text-cyber-green mr-3 mt-1 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+         </svg><span class="text-gray-700">Built Splunk filters for source IPs, compromised accounts, and credentials used in successful logins</span></li>
+        <li class="flex items-start">
+         <svg class="w-5 h-5 text-cyber-green mr-3 mt-1 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+         </svg><span class="text-gray-700">Investigated e-commerce logs to track vendors, products, payments, and abandoned shopping carts</span></li>
+        <li class="flex items-start">
+         <svg class="w-5 h-5 text-cyber-green mr-3 mt-1 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+         </svg><span class="text-gray-700">Created dashboards and reports summarizing anomalies, queries, and security insights for stakeholders</span></li>
+       </ul>
+      </div>
+     </div>
+    </div>
+   </div>
+  </section><!-- Projects Section -->
+  <section id="projects" class="py-16 bg-light-green">
+   <div class="max-w-6xl mx-auto px-4">
+    <h2 class="text-4xl font-bold text-center mb-12 gradient-text">Featured Projects</h2>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8"><!-- Project 1: TrustFace -->
+     <div class="bg-white p-6 rounded-xl shadow-lg card-hover">
+      <div class="flex items-center mb-4">
+       <div class="w-10 h-10 bg-cyber-green rounded-lg flex items-center justify-center mr-3">
+        <svg class="w-5 h-5 text-white" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M18 8a6 6 0 01-7.743 5.743L10 14l-0.257-0.257A6 6 0 0118 8zM2 8a6 6 0 017.743-5.743L10 2l0.257 0.257A6 6 0 012 8zm8 2a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
+        </svg>
+       </div>
+       <h3 class="text-xl font-bold text-dark-green">TrustFace</h3>
+      </div>
+      <p class="text-gray-700 mb-4">Developed an offline face-recognition lock that secures devices by locking when an authorized user's face is undetected.</p>
+      <ul class="space-y-2 mb-4">
+       <li class="flex items-start text-sm text-gray-700">
+        <svg class="w-4 h-4 text-cyber-green mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+        </svg><span>Fully on-device without internet, supporting multiple trusted users</span></li>
+       <li class="flex items-start text-sm text-gray-700">
+        <svg class="w-4 h-4 text-cyber-green mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+        </svg><span>OpenCV-based recognition with optimized real-time detection</span></li>
+       <li class="flex items-start text-sm text-gray-700">
+        <svg class="w-4 h-4 text-cyber-green mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+        </svg><span>Prevents unauthorized access with audit-ready records</span></li>
+      </ul>
+      <div class="flex flex-wrap gap-2 mb-4"><span class="bg-light-green text-dark-green px-2 py-1 rounded text-xs">OpenCV</span> <span class="bg-light-green text-dark-green px-2 py-1 rounded text-xs">Python</span> <span class="bg-light-green text-dark-green px-2 py-1 rounded text-xs">Security</span>
+      </div><button onclick="toggleProjectDetails('project1')" class="w-full bg-cyber-green text-white px-4 py-2 rounded-lg font-semibold hover:bg-opacity-90 transition-all"> View Details </button>
+     </div><!-- Project 2: AD Pentesting -->
+     <div class="bg-white p-6 rounded-xl shadow-lg card-hover">
+      <div class="flex items-center mb-4">
+       <div class="w-10 h-10 bg-dark-green rounded-lg flex items-center justify-center mr-3">
+        <svg class="w-5 h-5 text-white" fill="currentColor" viewbox="0 0 20 20"><path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"></path>
+        </svg>
+       </div>
+       <h3 class="text-xl font-bold text-dark-green">Automated AD Pentesting</h3>
+      </div>
+      <p class="text-gray-700 mb-4">Automated Active Directory penetration testing using Nmap, CrackMapExec, SMB relay, and PsExec within the environment.</p>
+      <ul class="space-y-2 mb-4">
+       <li class="flex items-start text-sm text-gray-700">
+        <svg class="w-4 h-4 text-cyber-green mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+        </svg><span>Consistent, repeatable testing reducing manual effort</span></li>
+       <li class="flex items-start text-sm text-gray-700">
+        <svg class="w-4 h-4 text-cyber-green mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+        </svg><span>BloodHound visualization of attack paths</span></li>
+       <li class="flex items-start text-sm text-gray-700">
+        <svg class="w-4 h-4 text-cyber-green mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+        </svg><span>Automated credential spraying and privilege escalation</span></li>
+      </ul>
+      <div class="flex flex-wrap gap-2 mb-4"><span class="bg-light-green text-dark-green px-2 py-1 rounded text-xs">BloodHound</span> <span class="bg-light-green text-dark-green px-2 py-1 rounded text-xs">CrackMapExec</span> <span class="bg-light-green text-dark-green px-2 py-1 rounded text-xs">Nmap</span>
+      </div><button onclick="toggleProjectDetails('project2')" class="w-full bg-dark-green text-white px-4 py-2 rounded-lg font-semibold hover:bg-opacity-90 transition-all"> View Details </button>
+     </div><!-- Project 3: Secure Voting App -->
+     <div class="bg-white p-6 rounded-xl shadow-lg card-hover">
+      <div class="flex items-center mb-4">
+       <div class="w-10 h-10 bg-cyber-green rounded-lg flex items-center justify-center mr-3">
+        <svg class="w-5 h-5 text-white" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+        </svg>
+       </div>
+       <h3 class="text-xl font-bold text-dark-green">Secure Voting App</h3>
+      </div>
+      <p class="text-gray-700 mb-4">Designed and implemented a secure voting app using Google OAuth for authentication and SQLite for vote storage.</p>
+      <ul class="space-y-2 mb-4">
+       <li class="flex items-start text-sm text-gray-700">
+        <svg class="w-4 h-4 text-cyber-green mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+        </svg><span>Secure platform for small-scale elections or surveys</span></li>
+       <li class="flex items-start text-sm text-gray-700">
+        <svg class="w-4 h-4 text-cyber-green mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+        </svg><span>AES encryption for vote data and session tokens</span></li>
+       <li class="flex items-start text-sm text-gray-700">
+        <svg class="w-4 h-4 text-cyber-green mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+        </svg><span>API tested with Docker and Postman preventing duplicate votes</span></li>
+      </ul>
+      <div class="flex flex-wrap gap-2 mb-4"><span class="bg-light-green text-dark-green px-2 py-1 rounded text-xs">OAuth</span> <span class="bg-light-green text-dark-green px-2 py-1 rounded text-xs">SQLite</span> <span class="bg-light-green text-dark-green px-2 py-1 rounded text-xs">AES Encryption</span>
+      </div><button onclick="toggleProjectDetails('project3')" class="w-full bg-cyber-green text-white px-4 py-2 rounded-lg font-semibold hover:bg-opacity-90 transition-all"> View Details </button>
+     </div>
+    </div>
+   </div>
+  </section><!-- Project Details Section -->
+  <section id="project-details" class="py-16 bg-white hidden">
+   <div class="max-w-6xl mx-auto px-4">
+    <div class="flex justify-between items-center mb-8">
+     <h2 class="text-4xl font-bold gradient-text">Project Details</h2><button onclick="closeProjectDetails()" class="bg-dark-green text-white px-6 py-2 rounded-lg font-semibold hover:bg-opacity-90 transition-all"> Close </button>
+    </div><!-- Project 1 Details -->
+    <div id="project1-details" class="hidden project-detail-content">
+     <div class="bg-light-green p-8 rounded-xl shadow-lg">
+      <h3 class="text-3xl font-bold text-dark-green mb-6">TrustFace - Face Recognition Lock</h3>
+      <div class="grid md:grid-cols-2 gap-4 mb-6">
+       <div class="bg-white p-4 rounded-lg border-2 border-cyber-green min-h-64 flex items-center justify-center">
+        <p class="text-gray-500 text-center">Add your screenshot or video here</p>
+       </div>
+       <div class="bg-white p-4 rounded-lg border-2 border-cyber-green min-h-64 flex items-center justify-center">
+        <p class="text-gray-500 text-center">Add your screenshot or video here</p>
+       </div>
+      </div>
+      <p class="text-gray-700 leading-relaxed">Place additional details, technical specifications, or project outcomes here.</p>
+     </div>
+    </div><!-- Project 2 Details -->
+    <div id="project2-details" class="hidden project-detail-content">
+     <div class="bg-light-green p-8 rounded-xl shadow-lg">
+      <h3 class="text-3xl font-bold text-dark-green mb-6">Automated AD Penetration Testing</h3>
+      <div class="grid md:grid-cols-2 gap-4 mb-6">
+       <div class="bg-white p-4 rounded-lg border-2 border-dark-green min-h-64 flex items-center justify-center">
+        <p class="text-gray-500 text-center">Add your screenshot or video here</p>
+       </div>
+       <div class="bg-white p-4 rounded-lg border-2 border-dark-green min-h-64 flex items-center justify-center">
+        <p class="text-gray-500 text-center">Add your screenshot or video here</p>
+       </div>
+      </div>
+      <p class="text-gray-700 leading-relaxed">Place additional details, technical specifications, or project outcomes here.</p>
+     </div>
+    </div><!-- Project 3 Details -->
+    <div id="project3-details" class="hidden project-detail-content">
+     <div class="bg-light-green p-8 rounded-xl shadow-lg">
+      <h3 class="text-3xl font-bold text-dark-green mb-6">Secure Voting Application</h3>
+      <div class="grid md:grid-cols-2 gap-4 mb-6">
+       <div class="bg-white p-4 rounded-lg border-2 border-cyber-green min-h-64 flex items-center justify-center">
+        <p class="text-gray-500 text-center">Add your screenshot or video here</p>
+       </div>
+       <div class="bg-white p-4 rounded-lg border-2 border-cyber-green min-h-64 flex items-center justify-center">
+        <p class="text-gray-500 text-center">Add your screenshot or video here</p>
+       </div>
+      </div>
+      <p class="text-gray-700 leading-relaxed">Place additional details, technical specifications, or project outcomes here.</p>
+     </div>
+    </div>
+   </div>
+  </section><!-- Activities & Interests -->
+  <section class="py-16 bg-white">
+   <div class="max-w-6xl mx-auto px-4">
+    <div class="grid md:grid-cols-2 gap-12">
+     <div>
+      <h2 class="text-3xl font-bold mb-8 gradient-text">Extracurricular Activities</h2>
+      <div class="space-y-6">
+       <div class="flex items-start">
+        <div class="w-8 h-8 bg-cyber-green rounded-full flex items-center justify-center mr-4 mt-1 flex-shrink-0">
+         <svg class="w-4 h-4 text-white" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+         </svg>
         </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="py-16 bg-white">
-        <div class="max-w-6xl mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center mb-12 gradient-text">About Me</h2>
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div>
-                    <p class="text-lg text-gray-700 mb-6 leading-relaxed">
-                        I'm a cybersecurity graduate student with a strong foundation in networking, Linux, digital forensics, and ethical hacking. With certifications in Security+, PJPT, and CCST, I bring hands-on experience in secure app development, Active Directory penetration testing, and system hardening.
-                    </p>
-                    <p class="text-lg text-gray-700 mb-6 leading-relaxed">
-                        I'm skilled in industry-standard tools and have proficiency in multiple programming languages. My approach focuses on learning through real-world application, and I'm known for simplifying complex technical concepts for diverse audiences.
-                    </p>
-                </div>
-                <div class="bg-light-green p-8 rounded-xl">
-                    <h3 class="text-2xl font-bold text-dark-green mb-6">Technical Skills</h3>
-                    <div class="space-y-4">
-                        <div>
-                            <div class="flex justify-between mb-2">
-                                <span class="font-semibold text-dark-green">Security Tools</span>
-                                <span class="text-cyber-green">95%</span>
-                            </div>
-                            <div class="bg-gray-200 rounded-full h-2">
-                                <div class="skill-bar rounded-full" style="width: 95%"></div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="flex justify-between mb-2">
-                                <span class="font-semibold text-dark-green">Programming</span>
-                                <span class="text-cyber-green">90%</span>
-                            </div>
-                            <div class="bg-gray-200 rounded-full h-2">
-                                <div class="skill-bar rounded-full" style="width: 90%"></div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="flex justify-between mb-2">
-                                <span class="font-semibold text-dark-green">Network Security</span>
-                                <span class="text-cyber-green">92%</span>
-                            </div>
-                            <div class="bg-gray-200 rounded-full h-2">
-                                <div class="skill-bar rounded-full" style="width: 92%"></div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="flex justify-between mb-2">
-                                <span class="font-semibold text-dark-green">Digital Forensics</span>
-                                <span class="text-cyber-green">88%</span>
-                            </div>
-                            <div class="bg-gray-200 rounded-full h-2">
-                                <div class="skill-bar rounded-full" style="width: 88%"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div>
+         <h3 class="font-bold text-dark-green">Hackathon Participant</h3>
+         <p class="text-gray-700">Competed in university and online hackathons focused on ethical hacking and secure app development</p>
         </div>
-    </section>
-
-    <!-- Education Section -->
-    <section id="education" class="py-16 bg-light-green">
-        <div class="max-w-6xl mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center mb-12 gradient-text">Education</h2>
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="bg-white p-8 rounded-xl shadow-lg card-hover">
-                    <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 bg-cyber-green rounded-full flex items-center justify-center mr-4">
-                            <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"></path>
-                            </svg>
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-bold text-dark-green">Master's Degree</h3>
-                            <p class="text-gray-600">Saint Peter's University – Jersey City, NJ</p>
-                        </div>
-                    </div>
-                    <div class="mb-4">
-                        <p class="text-lg font-semibold text-dark-green">Master's in Cybersecurity</p>
-                        <p class="text-cyber-green font-bold">GPA: 4.0</p>
-                        <p class="text-gray-600">Feb 2024 - May 2025</p>
-                    </div>
-                    <div>
-                        <p class="font-semibold text-dark-green mb-2">Key Coursework:</p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="bg-cyber-green bg-opacity-20 text-dark-green px-3 py-1 rounded-full text-sm">Network Security</span>
-                            <span class="bg-cyber-green bg-opacity-20 text-dark-green px-3 py-1 rounded-full text-sm">Digital Forensics</span>
-                            <span class="bg-cyber-green bg-opacity-20 text-dark-green px-3 py-1 rounded-full text-sm">Ethical Hacking</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-white p-8 rounded-xl shadow-lg card-hover">
-                    <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 bg-dark-green rounded-full flex items-center justify-center mr-4">
-                            <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"></path>
-                            </svg>
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-bold text-dark-green">Bachelor's Degree</h3>
-                            <p class="text-gray-600">Presidency University – Bangalore, India</p>
-                        </div>
-                    </div>
-                    <div class="mb-4">
-                        <p class="text-lg font-semibold text-dark-green">Bachelor's in Computer Science Engineering</p>
-                        <p class="text-cyber-green font-bold">GPA: 3.6</p>
-                        <p class="text-gray-600">August 2018 - June 2023</p>
-                    </div>
-                    <div>
-                        <p class="font-semibold text-dark-green mb-2">Relevant Topics:</p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="bg-dark-green bg-opacity-20 text-dark-green px-3 py-1 rounded-full text-sm">Data Structures</span>
-                            <span class="bg-dark-green bg-opacity-20 text-dark-green px-3 py-1 rounded-full text-sm">Operating Systems</span>
-                            <span class="bg-dark-green bg-opacity-20 text-dark-green px-3 py-1 rounded-full text-sm">Cryptography</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+       </div>
+       <div class="flex items-start">
+        <div class="w-8 h-8 bg-cyber-green rounded-full flex items-center justify-center mr-4 mt-1 flex-shrink-0">
+         <svg class="w-4 h-4 text-white" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+         </svg>
         </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects" class="py-16 bg-white">
-        <div class="max-w-6xl mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center mb-12 gradient-text">Featured Projects</h2>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Project 1 -->
-                <div class="bg-light-green p-6 rounded-xl shadow-lg card-hover">
-                    <div class="flex items-center mb-4">
-                        <div class="w-10 h-10 bg-cyber-green rounded-lg flex items-center justify-center mr-3">
-                            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M18 8a6 6 0 01-7.743 5.743L10 14l-0.257-0.257A6 6 0 0118 8zM2 8a6 6 0 017.743-5.743L10 2l0.257 0.257A6 6 0 012 8zm8 2a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
-                            </svg>
-                        </div>
-                        <h3 class="text-xl font-bold text-dark-green">TrustFace</h3>
-                        <span class="ml-auto bg-cyber-green text-white px-2 py-1 rounded text-xs">In Progress</span>
-                    </div>
-                    <p class="text-gray-700 mb-4">Developing an offline face-recognition lock system that secures unattended devices by locking them if the authorized user's face isn't detected for a set time.</p>
-                    <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="bg-white text-dark-green px-2 py-1 rounded text-xs">Face Recognition</span>
-                        <span class="bg-white text-dark-green px-2 py-1 rounded text-xs">Security</span>
-                        <span class="bg-white text-dark-green px-2 py-1 rounded text-xs">Offline</span>
-                    </div>
-                    <button class="w-full bg-cyber-green text-white py-2 rounded-lg hover:bg-opacity-90 transition-colors">
-                        View Details
-                    </button>
-                </div>
-
-                <!-- Project 2 -->
-                <div class="bg-light-green p-6 rounded-xl shadow-lg card-hover">
-                    <div class="flex items-center mb-4">
-                        <div class="w-10 h-10 bg-dark-green rounded-lg flex items-center justify-center mr-3">
-                            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"></path>
-                            </svg>
-                        </div>
-                        <h3 class="text-xl font-bold text-dark-green">AD Penetration Testing</h3>
-                    </div>
-                    <p class="text-gray-700 mb-4">Creating automation scripts using BloodHound, CrackMapExec, and Mimikatz to perform penetration testing in Active Directory environments.</p>
-                    <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="bg-white text-dark-green px-2 py-1 rounded text-xs">BloodHound</span>
-                        <span class="bg-white text-dark-green px-2 py-1 rounded text-xs">Automation</span>
-                        <span class="bg-white text-dark-green px-2 py-1 rounded text-xs">Pentesting</span>
-                    </div>
-                    <button class="w-full bg-dark-green text-white py-2 rounded-lg hover:bg-opacity-90 transition-colors">
-                        View Details
-                    </button>
-                </div>
-
-                <!-- Project 3 -->
-                <div class="bg-light-green p-6 rounded-xl shadow-lg card-hover">
-                    <div class="flex items-center mb-4">
-                        <div class="w-10 h-10 bg-cyber-green rounded-lg flex items-center justify-center mr-3">
-                            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                            </svg>
-                        </div>
-                        <h3 class="text-xl font-bold text-dark-green">Secure Voting App</h3>
-                    </div>
-                    <p class="text-gray-700 mb-4">Designed and implemented a secure voting app using Google OAuth for authentication and SQLite for vote storage with Docker and Postman testing.</p>
-                    <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="bg-white text-dark-green px-2 py-1 rounded text-xs">OAuth</span>
-                        <span class="bg-white text-dark-green px-2 py-1 rounded text-xs">Docker</span>
-                        <span class="bg-white text-dark-green px-2 py-1 rounded text-xs">API</span>
-                    </div>
-                    <button class="w-full bg-cyber-green text-white py-2 rounded-lg hover:bg-opacity-90 transition-colors">
-                        View Details
-                    </button>
-                </div>
-            </div>
+        <div>
+         <h3 class="font-bold text-dark-green">Cybersecurity Club Member</h3>
+         <p class="text-gray-700">Participated in Capture The Flag (CTF) events and security workshops</p>
         </div>
-    </section>
-
-    <!-- Certifications Section -->
-    <section id="certifications" class="py-16 bg-light-green">
-        <div class="max-w-6xl mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center mb-12 gradient-text">Certifications & Experience</h2>
-            
-            <!-- Certifications -->
-            <div class="mb-12">
-                <h3 class="text-2xl font-bold text-dark-green mb-6 text-center">Professional Certifications</h3>
-                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <div class="bg-white p-6 rounded-xl shadow-lg text-center card-hover">
-                        <div class="w-16 h-16 bg-cyber-green rounded-full flex items-center justify-center mx-auto mb-4">
-                            <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                            </svg>
-                        </div>
-                        <h4 class="font-bold text-dark-green">CompTIA Security+</h4>
-                        <p class="text-sm text-gray-600">SY0-701</p>
-                    </div>
-                    
-                    <div class="bg-white p-6 rounded-xl shadow-lg text-center card-hover">
-                        <div class="w-16 h-16 bg-dark-green rounded-full flex items-center justify-center mx-auto mb-4">
-                            <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                            </svg>
-                        </div>
-                        <h4 class="font-bold text-dark-green">PJPT</h4>
-                        <p class="text-sm text-gray-600">Active Directory</p>
-                    </div>
-                    
-                    <div class="bg-white p-6 rounded-xl shadow-lg text-center card-hover">
-                        <div class="w-16 h-16 bg-cyber-green rounded-full flex items-center justify-center mx-auto mb-4">
-                            <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                            </svg>
-                        </div>
-                        <h4 class="font-bold text-dark-green">Cisco CCST</h4>
-                        <p class="text-sm text-gray-600">Networking</p>
-                    </div>
-                    
-                    <div class="bg-white p-6 rounded-xl shadow-lg text-center card-hover">
-                        <div class="w-16 h-16 bg-cyber-green rounded-full flex items-center justify-center mx-auto mb-4">
-                            <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                            </svg>
-                        </div>
-                        <h4 class="font-bold text-dark-green">CCNA</h4>
-                        <p class="text-sm text-gray-600">Networking</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Internship -->
-            <div class="bg-white p-8 rounded-xl shadow-lg">
-                <h3 class="text-2xl font-bold text-dark-green mb-6">Professional Experience</h3>
-                <div class="border-l-4 border-cyber-green pl-6">
-                    <h4 class="text-xl font-bold text-dark-green mb-2">Cybersecurity Internship – Log Analysis with Splunk</h4>
-                    <p class="text-cyber-green font-semibold mb-2">Saint Peter's University</p>
-                    <ul class="text-gray-700 space-y-2">
-                        <li>• Analyzed raw log files using Splunk to identify security events and system behaviors</li>
-                        <li>• Created custom filters to extract relevant insights and highlight anomalies</li>
-                        <li>• Built dashboards for each set of logs to visually represent key findings and trends</li>
-                        <li>• Submitted detailed reports summarizing observations, filters used, and dashboard outputs</li>
-                    </ul>
-                </div>
-            </div>
+       </div>
+       <div class="flex items-start">
+        <div class="w-8 h-8 bg-cyber-green rounded-full flex items-center justify-center mr-4 mt-1 flex-shrink-0">
+         <svg class="w-4 h-4 text-white" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+         </svg>
         </div>
-    </section>
-
-    <!-- Tools & Technologies -->
-    <section class="py-16 bg-white">
-        <div class="max-w-6xl mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center mb-12 gradient-text">Tools & Technologies</h2>
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="text-center">
-                    <h3 class="text-xl font-bold text-dark-green mb-4">Security Tools</h3>
-                    <div class="flex flex-wrap justify-center gap-2">
-                        <span class="bg-cyber-green bg-opacity-20 text-dark-green px-3 py-2 rounded-lg">Nmap</span>
-                        <span class="bg-cyber-green bg-opacity-20 text-dark-green px-3 py-2 rounded-lg">Splunk</span>
-                        <span class="bg-cyber-green bg-opacity-20 text-dark-green px-3 py-2 rounded-lg">Burp Suite</span>
-                        <span class="bg-cyber-green bg-opacity-20 text-dark-green px-3 py-2 rounded-lg">Wireshark</span>
-                        <span class="bg-cyber-green bg-opacity-20 text-dark-green px-3 py-2 rounded-lg">Bloodhound</span>
-                        <span class="bg-cyber-green bg-opacity-20 text-dark-green px-3 py-2 rounded-lg">Metasploit</span>
-                    </div>
-                </div>
-                <div class="text-center">
-                    <h3 class="text-xl font-bold text-dark-green mb-4">Programming</h3>
-                    <div class="flex flex-wrap justify-center gap-2">
-                        <span class="bg-dark-green bg-opacity-20 text-dark-green px-3 py-2 rounded-lg">Python</span>
-                        <span class="bg-dark-green bg-opacity-20 text-dark-green px-3 py-2 rounded-lg">Java</span>
-                        <span class="bg-dark-green bg-opacity-20 text-dark-green px-3 py-2 rounded-lg">HTML5</span>
-                        <span class="bg-dark-green bg-opacity-20 text-dark-green px-3 py-2 rounded-lg">SQL</span>
-                    </div>
-                </div>
-                <div class="text-center">
-                    <h3 class="text-xl font-bold text-dark-green mb-4">Networking</h3>
-                    <div class="flex flex-wrap justify-center gap-2">
-                        <span class="bg-cyber-green bg-opacity-20 text-dark-green px-3 py-2 rounded-lg">Cisco Packet Tracer</span>
-                        <span class="bg-cyber-green bg-opacity-20 text-dark-green px-3 py-2 rounded-lg">Linux</span>
-                        <span class="bg-cyber-green bg-opacity-20 text-dark-green px-3 py-2 rounded-lg">Active Directory</span>
-                    </div>
-                </div>
-            </div>
+        <div>
+         <h3 class="font-bold text-dark-green">Open Source Contributor</h3>
+         <p class="text-gray-700">Contributed code and documentation to cybersecurity-related GitHub projects</p>
         </div>
-    </section>
-
-    <!-- Activities & Interests -->
-    <section class="py-16 bg-light-green">
-        <div class="max-w-6xl mx-auto px-4">
-            <div class="grid md:grid-cols-2 gap-12">
-                <div>
-                    <h2 class="text-3xl font-bold mb-8 gradient-text">Extracurricular Activities</h2>
-                    <div class="space-y-6">
-                        <div class="flex items-start">
-                            <div class="w-8 h-8 bg-cyber-green rounded-full flex items-center justify-center mr-4 mt-1">
-                                <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                                </svg>
-                            </div>
-                            <div>
-                                <h3 class="font-bold text-dark-green">Hackathon Participant</h3>
-                                <p class="text-gray-700">Competed in university and online hackathons focused on ethical hacking and secure app development</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start">
-                            <div class="w-8 h-8 bg-cyber-green rounded-full flex items-center justify-center mr-4 mt-1">
-                                <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                                </svg>
-                            </div>
-                            <div>
-                                <h3 class="font-bold text-dark-green">Tech Blog Writer</h3>
-                                <p class="text-gray-700">Wrote articles on cybersecurity tools, attacks, and digital forensics for a student tech blog</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start">
-                            <div class="w-8 h-8 bg-cyber-green rounded-full flex items-center justify-center mr-4 mt-1">
-                                <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                                </svg>
-                            </div>
-                            <div>
-                                <h3 class="font-bold text-dark-green">Cybersecurity Club Member</h3>
-                                <p class="text-gray-700">Participated in Capture The Flag (CTF) events and security workshops</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start">
-                            <div class="w-8 h-8 bg-cyber-green rounded-full flex items-center justify-center mr-4 mt-1">
-                                <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                                </svg>
-                            </div>
-                            <div>
-                                <h3 class="font-bold text-dark-green">Open Source Contributor</h3>
-                                <p class="text-gray-700">Contributed code and documentation to cybersecurity-related GitHub projects</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div>
-                    <h2 class="text-3xl font-bold mb-8 gradient-text">Personal Interests</h2>
-                    <div class="grid grid-cols-1 gap-6">
-                        <div class="bg-white p-6 rounded-xl shadow-lg">
-                            <div class="flex items-center mb-3">
-                                <div class="w-10 h-10 bg-cyber-green rounded-full flex items-center justify-center mr-4">
-                                    <span class="text-white text-xl">🏏</span>
-                                </div>
-                                <h3 class="font-bold text-dark-green">Playing Cricket</h3>
-                            </div>
-                            <p class="text-gray-700">Passionate about cricket and enjoy playing regularly to stay active and build teamwork skills</p>
-                        </div>
-                        
-                        <div class="bg-white p-6 rounded-xl shadow-lg">
-                            <div class="flex items-center mb-3">
-                                <div class="w-10 h-10 bg-dark-green rounded-full flex items-center justify-center mr-4">
-                                    <span class="text-white text-xl">⚙️</span>
-                                </div>
-                                <h3 class="font-bold text-dark-green">Old Technologies</h3>
-                            </div>
-                            <p class="text-gray-700">Fascinated by learning about historical technologies and inventions that shaped our modern world</p>
-                        </div>
-                        
-                        <div class="bg-white p-6 rounded-xl shadow-lg">
-                            <div class="flex items-center mb-3">
-                                <div class="w-10 h-10 bg-cyber-green rounded-full flex items-center justify-center mr-4">
-                                    <span class="text-white text-xl">🔬</span>
-                                </div>
-                                <h3 class="font-bold text-dark-green">Science Documentaries</h3>
-                            </div>
-                            <p class="text-gray-700">Love watching documentaries about science and technology to expand knowledge and stay curious</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+       </div>
+      </div>
+     </div>
+     <div>
+      <h2 class="text-3xl font-bold mb-8 gradient-text">Personal Interests</h2>
+      <div class="grid grid-cols-1 gap-6">
+       <div class="bg-light-green p-6 rounded-xl shadow-lg">
+        <div class="flex items-center mb-3">
+         <div class="w-10 h-10 bg-cyber-green rounded-full flex items-center justify-center mr-4"><span class="text-white text-xl">🏏</span>
+         </div>
+         <h3 class="font-bold text-dark-green">Playing Cricket</h3>
         </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="py-16 bg-white">
-        <div class="max-w-4xl mx-auto px-4 text-center">
-            <h2 class="text-4xl font-bold mb-8 gradient-text">Let's Connect</h2>
-            <p class="text-xl text-gray-600 mb-12">Ready to discuss cybersecurity opportunities or collaborate on exciting projects?</p>
-            
-            <div class="grid md:grid-cols-3 gap-8 mb-12">
-                <div class="bg-light-green p-6 rounded-xl">
-                    <div class="w-12 h-12 bg-cyber-green rounded-full flex items-center justify-center mx-auto mb-4">
-                        <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
-                            <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
-                        </svg>
-                    </div>
-                    <h3 class="font-bold text-dark-green mb-2">Email</h3>
-                    <p class="text-gray-600">sudhirreddy1312@gmail.com</p>
-                </div>
-                
-                <div class="bg-light-green p-6 rounded-xl">
-                    <div class="w-12 h-12 bg-cyber-green rounded-full flex items-center justify-center mx-auto mb-4">
-                        <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M10 0C4.477 0 0 4.484 0 10.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0110 4.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.942.359.31.678.921.678 1.856 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0020 10.017C20 4.484 15.522 0 10 0z" clip-rule="evenodd"></path>
-                        </svg>
-                    </div>
-                    <h3 class="font-bold text-dark-green mb-2">GitHub</h3>
-                    <p class="text-gray-600">https://github.com/sudhirreddy1312</p>
-                </div>
-            </div>
-            
-            <div class="flex flex-wrap justify-center gap-4">
-               <button id="download-btn" class="bg-cyber-green text-white px-8 py-3 rounded-lg font-semibold hover:bg-opacity-90 transition-all transform hover:scale-105">
-                  Download Resume
-                </button>
-                <button class="border-2 border-cyber-green text-cyber-green px-8 py-3 rounded-lg font-semibold hover:bg-cyber-green hover:text-white transition-all">
-                    Schedule Meeting
-                </button>
-            </div>
+        <p class="text-gray-700">Passionate about cricket and enjoy playing regularly to stay active and build teamwork skills</p>
+       </div>
+       <div class="bg-light-green p-6 rounded-xl shadow-lg">
+        <div class="flex items-center mb-3">
+         <div class="w-10 h-10 bg-dark-green rounded-full flex items-center justify-center mr-4"><span class="text-white text-xl">⚙️</span>
+         </div>
+         <h3 class="font-bold text-dark-green">Old Technologies</h3>
         </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-dark-green text-white py-8">
-        <div class="max-w-6xl mx-auto px-4 text-center">
-            <p class="mb-4">&copy; 2024 Cybersecurity Portfolio. Built with passion for security and innovation.</p>
-            <div class="flex justify-center space-x-6">
-                <a href="#" class="text-cyber-green hover:text-white transition-colors">Privacy Policy</a>
-                <a href="#" class="text-cyber-green hover:text-white transition-colors">Terms of Service</a>
-                <a href="#contact" class="text-cyber-green hover:text-white transition-colors">Contact</a>
-            </div>
+        <p class="text-gray-700">Fascinated by learning about historical technologies and inventions that shaped our modern world</p>
+       </div>
+       <div class="bg-light-green p-6 rounded-xl shadow-lg">
+        <div class="flex items-center mb-3">
+         <div class="w-10 h-10 bg-cyber-green rounded-full flex items-center justify-center mr-4"><span class="text-white text-xl">🔬</span>
+         </div>
+         <h3 class="font-bold text-dark-green">Science Documentaries</h3>
         </div>
-    </footer>
-
-    <script>
+        <p class="text-gray-700">Love watching documentaries about science and technology to expand knowledge and stay curious</p>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </section><!-- Contact Section -->
+  <section id="contact" class="py-16 bg-light-green">
+   <div class="max-w-4xl mx-auto px-4 text-center">
+    <h2 class="text-4xl font-bold mb-8 gradient-text">Let's Connect</h2>
+    <p class="text-xl text-gray-600 mb-12">Ready to discuss cybersecurity opportunities or collaborate on exciting projects?</p>
+    <div class="grid md:grid-cols-3 gap-8 mb-12">
+     <div class="bg-white p-6 rounded-xl shadow-lg">
+      <div class="w-12 h-12 bg-cyber-green rounded-full flex items-center justify-center mx-auto mb-4">
+       <svg class="w-6 h-6 text-white" fill="currentColor" viewbox="0 0 20 20"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path> <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
+       </svg>
+      </div>
+      <h3 class="font-bold text-dark-green mb-2">Email</h3>
+      <p class="text-gray-600">your.email@example.com</p>
+     </div>
+     <div class="bg-white p-6 rounded-xl shadow-lg">
+      <div class="w-12 h-12 bg-dark-green rounded-full flex items-center justify-center mx-auto mb-4">
+       <svg class="w-6 h-6 text-white" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5zm-5 5a2 2 0 012.828 0 1 1 0 101.414-1.414 4 4 0 00-5.656 0l-3 3a4 4 0 105.656 5.656l1.5-1.5a1 1 0 10-1.414-1.414l-1.5 1.5a2 2 0 11-2.828-2.828l3-3z" clip-rule="evenodd"></path>
+       </svg>
+      </div>
+      <h3 class="font-bold text-dark-green mb-2">LinkedIn</h3>
+      <p class="text-gray-600">linkedin.com/in/yourprofile</p>
+     </div>
+     <div class="bg-white p-6 rounded-xl shadow-lg">
+      <div class="w-12 h-12 bg-cyber-green rounded-full flex items-center justify-center mx-auto mb-4">
+       <svg class="w-6 h-6 text-white" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M10 0C4.477 0 0 4.484 0 10.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0110 4.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.942.359.31.678.921.678 1.856 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0020 10.017C20 4.484 15.522 0 10 0z" clip-rule="evenodd"></path>
+       </svg>
+      </div>
+      <h3 class="font-bold text-dark-green mb-2">GitHub</h3>
+      <p class="text-gray-600">github.com/yourusername</p>
+     </div>
+    </div>
+    <div class="flex flex-wrap justify-center gap-4"><button class="bg-cyber-green text-white px-8 py-3 rounded-lg font-semibold hover:bg-opacity-90 transition-all transform hover:scale-105" id="download-btn"> Download Resume </button> <button class="border-2 border-cyber-green text-cyber-green px-8 py-3 rounded-lg font-semibold hover:bg-cyber-green hover:text-white transition-all"> Schedule Meeting </button>
+    </div>
+   </div>
+  </section><!-- Footer -->
+  <footer class="bg-dark-green text-white py-8">
+   <div class="max-w-6xl mx-auto px-4 text-center">
+    <p class="mb-4">© 2024 Cybersecurity Portfolio. Built with passion for security and innovation.</p>
+    <div class="flex justify-center space-x-6"><a href="#" class="text-cyber-green hover:text-white transition-colors">Privacy Policy</a> <a href="#" class="text-cyber-green hover:text-white transition-colors">Terms of Service</a> <a href="#contact" class="text-cyber-green hover:text-white transition-colors">Contact</a>
+    </div>
+   </div>
+  </footer>
+  <script>
         // Mobile menu toggle
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
-        
+        document.addEventListener('DOMContentLoaded', () => {
+                const button = document.getElementById('download-btn');
+                if (button) {
+                        button.addEventListener('click', () => {
+                        window.open('SUDHIR REDDY SURAM.pdf', '_blank');
+                    });
+                  }
+                });
         mobileMenuBtn.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
         });
@@ -601,6 +573,39 @@
             }
         });
 
+        // Toggle credential visibility
+        function toggleCredential(certId) {
+            const certElement = document.querySelector(`[data-cert="${certId}"]`);
+            if (certElement) {
+                certElement.classList.toggle('hidden');
+            }
+        }
+
+        // Project details toggle functionality
+        function toggleProjectDetails(projectId) {
+            const detailsSection = document.getElementById('project-details');
+            const allDetails = document.querySelectorAll('.project-detail-content');
+            const projectDetails = document.getElementById(projectId + '-details');
+            
+            // Hide all project details first
+            allDetails.forEach(detail => detail.classList.add('hidden'));
+            
+            // Show the selected project details
+            projectDetails.classList.remove('hidden');
+            detailsSection.classList.remove('hidden');
+            
+            // Scroll to the details section
+            detailsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        
+        function closeProjectDetails() {
+            const detailsSection = document.getElementById('project-details');
+            detailsSection.classList.add('hidden');
+            
+            // Scroll back to projects section
+            document.getElementById('projects').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
         // Animate skill bars on scroll
         const observerOptions = {
             threshold: 0.5,
@@ -618,40 +623,11 @@
             });
         }, observerOptions);
 
-        const skillSection = document.querySelector('#about');
+        const skillSection = document.querySelector('#skills');
         if (skillSection) {
             observer.observe(skillSection);
         }
-
-        // Add click handlers for project buttons
-        document.querySelectorAll('button').forEach(button => {
-            if (button.textContent === 'View Details') {
-                button.addEventListener('click', () => {
-                    alert('Project details would open in a modal or new page. This is a demo portfolio.');
-                });
-            }
-            document.addEventListener('DOMContentLoaded', () => {
-                const button = document.getElementById('download-btn');
-                if (button) {
-                        button.addEventListener('click', () => {
-                        window.open('SUDHIR REDDY SURAM.pdf', '_blank');
-                    });
-                  }
-                });
-            if (button.textContent === 'Schedule Meeting') {
-                button.addEventListener('click', () => {
-                    alert('Meeting scheduler would open here. This is a demo portfolio.');
-                });
-            }
-        });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'969424c40286cd7f',t:'MTc1NDIwNjU4Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'969424c40286cd7f',t:'MTc1NDIwNjU4Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a8f541c048c427f',t:'MTc2NDg5MzUxMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
-
-
-
-
-
-
-
-

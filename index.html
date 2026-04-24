@@ -1,639 +1,668 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="h-full">
  <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cybersecurity Portfolio</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&amp;family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
   <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'cyber-green': '#00ff88',
-                        'dark-green': '#0d4f3c',
-                        'light-green': '#e8f5e8',
-                        'matrix-green': '#00ff41',
-                        'hacker-black': '#0a0a0a',
-                        'dark-gray': '#1a1a1a'
-                    }
-                }
-            }
-        }
-    </script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        cyber: '#0BDA51',
+        cyberDark: '#09b843',
+        cyberDim: 'rgba(11,218,81,0.15)',
+        dark: { 900: '#050505', 800: '#0a0a0a', 700: '#111111', 600: '#1a1a1a', 500: '#222222' }
+      },
+      fontFamily: {
+        mono: ['JetBrains Mono', 'monospace'],
+        sans: ['Space Grotesk', 'sans-serif']
+      }
+    }
+  }
+}
+</script>
   <style>
-        body {
-            box-sizing: border-box;
-        }
-        
-        .typing-animation {
-            border-right: 2px solid #00ff88;
-            animation: blink 1s infinite;
-        }
-        
-        @keyframes blink {
-            0%, 50% { border-color: transparent; }
-            51%, 100% { border-color: #00ff88; }
-        }
-        .gradient-text {
-            background: linear-gradient(135deg, #00ff88, #0d4f3c);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .card-hover {
-            transition: all 0.3s ease;
-        }
-        
-        .card-hover:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0, 255, 136, 0.1);
-        }
-        
-        .skill-bar {
-            background: linear-gradient(90deg, #00ff88, #0d4f3c);
-            height: 6px;
-            border-radius: 3px;
-            animation: fillBar 2s ease-in-out;
-        }
-        
-        @keyframes fillBar {
-            from { width: 0; }
-        }
-    </style>
-  <style>@view-transition { navigation: auto; }</style>
+html, body { height: 100%; margin: 0; }
+* { scrollbar-width: thin; scrollbar-color: #0BDA51 #111; }
+
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+@keyframes glitchShift {
+  0%, 100% { transform: translate(0); }
+  20% { transform: translate(-2px, 1px); }
+  40% { transform: translate(2px, -1px); }
+  60% { transform: translate(-1px, 2px); }
+  80% { transform: translate(1px, -2px); }
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes typewriter {
+  from { width: 0; }
+  to { width: 100%; }
+}
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 5px rgba(11,218,81,0.3); }
+  50% { box-shadow: 0 0 20px rgba(11,218,81,0.6); }
+}
+@keyframes matrixRain {
+  0% { transform: translateY(-100%); opacity: 1; }
+  100% { transform: translateY(200%); opacity: 0; }
+}
+
+.scanline-overlay {
+  pointer-events: none;
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 50;
+  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(11,218,81,0.02) 2px, rgba(11,218,81,0.02) 4px);
+}
+.scanline-bar {
+  position: fixed; top: 0; left: 0; right: 0; height: 4px; z-index: 51;
+  background: linear-gradient(180deg, transparent, rgba(11,218,81,0.1), transparent);
+  animation: scanline 8s linear infinite;
+  pointer-events: none;
+}
+.cursor-blink::after {
+  content: '█'; animation: blink 1s step-end infinite; color: #0BDA51;
+}
+.fade-up { animation: fadeUp 0.7s ease forwards; opacity: 0; }
+.fade-up-d1 { animation-delay: 0.1s; }
+.fade-up-d2 { animation-delay: 0.2s; }
+.fade-up-d3 { animation-delay: 0.3s; }
+.fade-up-d4 { animation-delay: 0.4s; }
+.fade-up-d5 { animation-delay: 0.5s; }
+.fade-up-d6 { animation-delay: 0.6s; }
+
+.glow-border { border: 1px solid rgba(11,218,81,0.2); transition: all 0.3s ease; }
+.glow-border:hover { border-color: #0BDA51; box-shadow: 0 0 15px rgba(11,218,81,0.15); }
+
+.terminal-card {
+  background: #0a0a0a;
+  border: 1px solid rgba(11,218,81,0.15);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.terminal-header {
+  background: #111;
+  padding: 8px 12px;
+  display: flex; align-items: center; gap: 6px;
+  border-bottom: 1px solid rgba(11,218,81,0.1);
+}
+.terminal-dot { width: 10px; height: 10px; border-radius: 50%; }
+
+.skill-tag {
+  display: inline-block; padding: 4px 12px; border-radius: 4px; font-size: 0.75rem;
+  background: rgba(11,218,81,0.08); border: 1px solid rgba(11,218,81,0.2);
+  color: #0BDA51; transition: all 0.2s ease; font-family: 'JetBrains Mono', monospace;
+}
+.skill-tag:hover { background: rgba(11,218,81,0.2); transform: translateY(-1px); }
+
+.nav-link {
+  position: relative; color: #888; transition: color 0.3s;
+}
+.nav-link:hover, .nav-link.active { color: #0BDA51; }
+.nav-link::after {
+  content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px;
+  background: #0BDA51; transition: width 0.3s;
+}
+.nav-link:hover::after, .nav-link.active::after { width: 100%; }
+
+.matrix-col { position: absolute; top: 0; font-family: 'JetBrains Mono'; font-size: 12px; color: rgba(11,218,81,0.3); writing-mode: vertical-lr; animation: matrixRain linear infinite; pointer-events: none; }
+
+.project-card { transition: all 0.3s ease; }
+.project-card:hover { transform: translateY(-4px); }
+
+.timeline-line { width: 2px; background: linear-gradient(180deg, #0BDA51, rgba(11,218,81,0.1)); }
+</style>
+  <style>body { box-sizing: border-box; }</style>
   <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
-  <script src="/_sdk/element_sdk.js" type="text/javascript"></script>
  </head>
- <body class="bg-white text-gray-800 font-sans"><!-- Navigation -->
-  <nav class="bg-white shadow-lg fixed w-full top-0 z-50 border-b-4 border-cyber-green">
-   <div class="max-w-6xl mx-auto px-4">
-    <div class="flex justify-between items-center py-4">
-     <div class="text-2xl font-bold text-dark-green">
-      CyberSec Portfolio
-     </div>
-     <div class="hidden md:flex space-x-8"><a href="#about" class="text-dark-green hover:text-cyber-green transition-colors font-medium">About</a> <a href="#certifications" class="text-dark-green hover:text-cyber-green transition-colors font-medium">Certifications</a> <a href="#skills" class="text-dark-green hover:text-cyber-green transition-colors font-medium">Skills</a> <a href="#education" class="text-dark-green hover:text-cyber-green transition-colors font-medium">Education</a> <a href="#experience" class="text-dark-green hover:text-cyber-green transition-colors font-medium">Experience</a> <a href="#projects" class="text-dark-green hover:text-cyber-green transition-colors font-medium">Projects</a> <a href="#contact" class="text-dark-green hover:text-cyber-green transition-colors font-medium">Contact</a>
-     </div><button id="mobile-menu-btn" class="md:hidden text-dark-green">
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-      </svg></button>
+ <body class="h-full bg-dark-900 text-gray-300 font-sans overflow-auto">
+  <div class="scanline-overlay"></div>
+  <div class="scanline-bar"></div><!-- Matrix Rain Background -->
+  <div id="matrix-bg" class="fixed inset-0 overflow-hidden pointer-events-none z-0" aria-hidden="true"></div><!-- Navigation -->
+  <nav class="fixed top-0 left-0 right-0 z-40 bg-dark-900/90 backdrop-blur border-b border-dark-600">
+   <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+    <a href="#hero" class="font-mono text-cyber font-bold text-lg tracking-wider"> <span class="text-gray-500">&gt;</span> <span id="nav-name">USERNAME</span><span class="text-cyber animate-pulse">_</span> </a>
+    <div class="hidden md:flex items-center gap-6 font-mono text-sm">
+     <a href="#about" class="nav-link" data-nav>about()</a> <a href="#skills" class="nav-link" data-nav>skills()</a> <a href="#projects" class="nav-link" data-nav>projects()</a> <a href="#experience" class="nav-link" data-nav>experience()</a> <a href="#education" class="nav-link" data-nav>education()</a> <a href="#development" class="nav-link" data-nav>development()</a> <a href="#contact" class="nav-link" data-nav>contact()</a>
+    </div><button id="mobile-menu-btn" class="md:hidden text-gray-400 hover:text-cyber transition"> <i data-lucide="menu" style="width:24px;height:24px"></i> </button>
+   </div><!-- Mobile menu -->
+   <div id="mobile-menu" class="hidden md:hidden bg-dark-800 border-t border-dark-600 font-mono text-sm">
+    <a href="#about" class="block px-4 py-3 nav-link border-b border-dark-600" data-nav>about()</a> <a href="#skills" class="block px-4 py-3 nav-link border-b border-dark-600" data-nav>skills()</a> <a href="#projects" class="block px-4 py-3 nav-link border-b border-dark-600" data-nav>projects()</a> <a href="#experience" class="block px-4 py-3 nav-link border-b border-dark-600" data-nav>experience()</a> <a href="#education" class="block px-4 py-3 nav-link border-b border-dark-600" data-nav>education()</a> <a href="#development" class="block px-4 py-3 nav-link border-b border-dark-600" data-nav>development()</a> <a href="#contact" class="block px-4 py-3 nav-link" data-nav>contact()</a>
+   </div>
+  </nav><!-- Hero -->
+  <section id="hero" class="relative min-h-screen flex items-center justify-center px-4 pt-16">
+   <div class="text-center max-w-3xl mx-auto relative z-10">
+    <div class="fade-up fade-up-d1 font-mono text-sm text-cyber/60 mb-4 tracking-widest">
+     // INITIALIZING PORTFOLIO...
+    </div>
+    <h1 id="hero-name" class="fade-up fade-up-d2 text-5xl md:text-7xl font-bold text-white font-mono tracking-tight mb-4" style="text-shadow: 0 0 30px rgba(11,218,81,0.3);">Username</h1>
+    <div class="fade-up fade-up-d3 flex items-center justify-center gap-2 mb-6">
+     <span class="w-8 h-px bg-cyber/40"></span>
+     <p id="hero-tagline" class="text-lg md:text-xl text-cyber font-mono">Security Analyst &amp; Network Engineer</p><span class="w-8 h-px bg-cyber/40"></span>
+    </div>
+    <p id="hero-summary" class="fade-up fade-up-d4 text-gray-400 max-w-2xl mx-auto mb-8 leading-relaxed text-sm md:text-base">Network Enthusiast professional with Master's in Cybersecurity (GPA 4.0) and hands-on experience in log analysis, penetration testing, and network operations.</p>
+    <div class="fade-up fade-up-d5 flex flex-wrap justify-center gap-3 mb-10">
+     <span class="flex items-center gap-1 text-xs font-mono text-gray-500"><i data-lucide="map-pin" style="width:12px;height:12px;color:#0BDA51"></i> <span id="hero-location">city, state</span></span> <span class="text-dark-500">|</span> <span class="flex items-center gap-1 text-xs font-mono text-gray-500"><i data-lucide="mail" style="width:12px;height:12px;color:#0BDA51"></i> <span id="hero-email">user@gmail.com</span></span> <span class="text-dark-500">|</span> <span class="flex items-center gap-1 text-xs font-mono text-gray-500"><i data-lucide="phone" style="width:12px;height:12px;color:#0BDA51"></i> <span id="hero-phone">+1 (111)-(111)-1111</span></span>
+    </div>
+    <div class="fade-up fade-up-d6 flex justify-center gap-4">
+     <a href="#projects" class="px-6 py-3 bg-cyber text-dark-900 font-mono font-bold text-sm rounded hover:bg-cyberDark transition" style="animation: pulse-glow 3s infinite;">View Projects</a> <a href="#contact" class="px-6 py-3 border border-cyber/40 text-cyber font-mono text-sm rounded hover:bg-cyber/10 transition">Contact Me</a>
+    </div><!-- Scroll indicator -->
+    <div class="mt-16 animate-bounce">
+     <i data-lucide="chevron-down" style="width:20px;height:20px;color:rgba(11,218,81,0.4)"></i>
     </div>
    </div>
-  </nav><!-- Mobile Menu -->
-  <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg fixed w-full top-16 z-40 border-b-4 border-cyber-green">
-   <div class="px-4 py-2 space-y-2"><a href="#about" class="block py-2 text-dark-green hover:text-cyber-green font-medium">About</a> <a href="#certifications" class="block py-2 text-dark-green hover:text-cyber-green font-medium">Certifications</a> <a href="#skills" class="block py-2 text-dark-green hover:text-cyber-green font-medium">Skills</a> <a href="#education" class="block py-2 text-dark-green hover:text-cyber-green font-medium">Education</a> <a href="#experience" class="block py-2 text-dark-green hover:text-cyber-green font-medium">Experience</a> <a href="#projects" class="block py-2 text-dark-green hover:text-cyber-green font-medium">Projects</a> <a href="#contact" class="block py-2 text-dark-green hover:text-cyber-green font-medium">Contact</a>
-   </div>
-  </div><!-- Hero Section -->
-  <section class="pt-20 pb-16 bg-gradient-to-br from-light-green to-white">
-   <div class="max-w-6xl mx-auto px-4 text-center">
-    <div class="mb-8">
-     </div>
-     <div class="w-32 h-32 mx-auto mb-6 bg-gradient-to-br from-cyber-green to-dark-green rounded-full overflow-hidden flex items-center justify-center">
-  <img src="profile pic.jpeg" alt="Profile Photo" class="w-full h-full object-cover object-center transform scale-150 translate-y-[25px]">
-</div>
-     <h1 class="text-5xl md:text-6xl font-bold mb-4"><span class="gradient-text">Cybersecurity</span> <br><span class="text-dark-green typing-animation">Professional</span></h1>
-     <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed text-justify">MSc Cybersecurity candidate (GPA 4.0) with hands-on experience in log analysis, penetration testing, and network operations. Certified in CompTIA Security+, Cisco CCNA and CCST, and PJPT (Active Directory). Proven ability to learn and master new technologies quickly through labs, projects, and internships. Highly motivated to grow as a Security Analyst and contribute to enterprise security teams with dedication and results.</p>
+  </section><!-- About / Certifications -->
+  <section id="about" class="py-20 px-4 relative z-10">
+   <div class="max-w-5xl mx-auto">
+    <div class="font-mono text-cyber text-sm mb-2 tracking-wider fade-up">
+     &gt; cat certifications.txt
     </div>
-    <div class="flex flex-wrap justify-center gap-4"><button onclick="scrollToSection('projects')" class="bg-cyber-green text-white px-8 py-3 rounded-lg font-semibold hover:bg-opacity-90 transition-all transform hover:scale-105"> View Projects </button> <button onclick="scrollToSection('contact')" class="border-2 border-cyber-green text-cyber-green px-8 py-3 rounded-lg font-semibold hover:bg-cyber-green hover:text-white transition-all"> Get In Touch </button>
-    </div>
-   </div>
-  </section><!-- About Section -->
-  <section id="about" class="py-16 bg-white">
-   <div class="max-w-6xl mx-auto px-4">
-    <h2 class="text-4xl font-bold text-center mb-12 gradient-text">About Me</h2>
-    <div class="max-w-4xl mx-auto">
-     <p class="text-lg text-gray-700 mb-6 leading-relaxed text-justify">I'm a cybersecurity graduate student pursuing my Master's degree with a perfect 4.0 GPA. My journey in cybersecurity is driven by a passion for both offensive and defensive security practices. With hands-on experience in log analysis, penetration testing, and network operations, I bring a practical approach to securing digital environments.</p>
-     <p class="text-lg text-gray-700 leading-relaxed text-justify">I hold multiple industry certifications including CompTIA Security+, Cisco CCNA, and TCM Security's PJPT focused on Active Directory environments. My technical expertise spans across security tools like Splunk, Metasploit, and Burp Suite, combined with proficiency in multiple programming languages. I'm committed to continuous learning through CTF challenges, HackTheBox labs, and real-world security projects.</p>
-    </div>
-   </div>
-  </section><!-- Certifications Section -->
-  <section id="certifications" class="py-16 bg-light-green">
-   <div class="max-w-6xl mx-auto px-4">
-    <h2 class="text-4xl font-bold text-center mb-12 gradient-text">Certifications</h2>
-    <div class="grid md:grid-cols-2 lg:grid-cols-5 gap-6">
-     <div class="bg-white p-6 rounded-xl shadow-lg text-center card-hover">
-      <div class="w-16 h-16 bg-cyber-green rounded-full flex items-center justify-center mx-auto mb-4">
-       <svg class="w-8 h-8 text-white" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-       </svg>
+    <h2 class="text-3xl font-bold text-white mb-10 fade-up fade-up-d1">Certifications<span class="text-cyber">_</span></h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+     <div class="terminal-card glow-border fade-up fade-up-d1 p-5">
+      <div class="flex items-center gap-3 mb-2"><i data-lucide="shield-check" style="width:20px;height:20px;color:#0BDA51"></i><span class="font-mono text-white font-semibold text-sm">CompTIA Security+</span>
       </div>
-      <h4 class="font-bold text-dark-green text-lg mb-2">CompTIA Security+</h4>
-      <p class="text-xs text-gray-500 mb-3 hidden cert-id" data-cert="cert1">Candidate ID: COMP001022764373 <br> Code: S7WRD0PSTBF41Q5H</p><button onclick="toggleCredential('cert1')" class="bg-cyber-green text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-opacity-90 transition-all"> Verify </button>
+      <p class="text-gray-500 text-xs font-mono">Core security certification</p>
      </div>
-     <div class="bg-white p-6 rounded-xl shadow-lg text-center card-hover">
-      <div class="w-16 h-16 bg-dark-green rounded-full flex items-center justify-center mx-auto mb-4">
-       <svg class="w-8 h-8 text-white" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-       </svg>
+     <div class="terminal-card glow-border fade-up fade-up-d2 p-5">
+      <div class="flex items-center gap-3 mb-2"><i data-lucide="network" style="width:20px;height:20px;color:#0BDA51"></i><span class="font-mono text-white font-semibold text-sm">Cisco CCNA</span>
       </div>
-      <h4 class="font-bold text-dark-green text-lg mb-2">Cisco CCNA</h4>
-      <p class="text-xs text-gray-500 mb-3 hidden cert-id" data-cert="cert2">Verification number: 117c448cf44443a990667c125e<br>5b1030</p><button onclick="toggleCredential('cert2')" class="bg-dark-green text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-opacity-90 transition-all"> Verify </button>
+      <p class="text-gray-500 text-xs font-mono">Network fundamentals</p>
      </div>
-     <div class="bg-white p-6 rounded-xl shadow-lg text-center card-hover">
-      <div class="w-16 h-16 bg-cyber-green rounded-full flex items-center justify-center mx-auto mb-4">
-       <svg class="w-8 h-8 text-white" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-       </svg>
+     <div class="terminal-card glow-border fade-up fade-up-d3 p-5">
+      <div class="flex items-center gap-3 mb-2"><i data-lucide="target" style="width:20px;height:20px;color:#0BDA51"></i><span class="font-mono text-white font-semibold text-sm">TCM PJPT</span>
       </div>
-      <h4 class="font-bold text-dark-green text-lg mb-2">TCM PJPT</h4>
-      <p class="text-xs text-gray-600 mb-1">Active Directory Pentesting</p>
-      <p class="text-xs text-gray-500 mb-3 hidden cert-id" data-cert="cert3">Certificate #:124242262</p><button onclick="toggleCredential('cert3')" class="bg-cyber-green text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-opacity-90 transition-all"> Verify </button>
+      <p class="text-gray-500 text-xs font-mono">Active Directory pentesting</p>
      </div>
-     <div class="bg-white p-6 rounded-xl shadow-lg text-center card-hover">
-      <div class="w-16 h-16 bg-dark-green rounded-full flex items-center justify-center mx-auto mb-4">
-       <svg class="w-8 h-8 text-white" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-       </svg>
+     <div class="terminal-card glow-border fade-up fade-up-d4 p-5">
+      <div class="flex items-center gap-3 mb-2"><i data-lucide="wifi" style="width:20px;height:20px;color:#0BDA51"></i><span class="font-mono text-white font-semibold text-sm">Cisco CCST</span>
       </div>
-      <h4 class="font-bold text-dark-green text-lg mb-2">Cisco CCST</h4>
-      <p class="text-xs text-gray-500 mb-3 hidden cert-id" data-cert="cert4">Verification ID: xdhs-s4aK</p><button onclick="toggleCredential('cert4')" class="bg-dark-green text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-opacity-90 transition-all"> Verify </button>
+      <p class="text-gray-500 text-xs font-mono">Support technician</p>
      </div>
-     <div class="bg-white p-6 rounded-xl shadow-lg text-center card-hover">
-      <div class="w-16 h-16 bg-cyber-green rounded-full flex items-center justify-center mx-auto mb-4">
-       <svg class="w-8 h-8 text-white" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-       </svg>
+     <div class="terminal-card glow-border fade-up fade-up-d5 p-5">
+      <div class="flex items-center gap-3 mb-2"><i data-lucide="search" style="width:20px;height:20px;color:#0BDA51"></i><span class="font-mono text-white font-semibold text-sm">Splunk</span>
       </div>
-      <h4 class="font-bold text-dark-green text-lg mb-2">Splunk</h4>
-      <p class="text-xs text-gray-500 mb-3 hidden cert-id" data-cert="cert5">ID: SPLK555666777</p><button onclick="toggleCredential('cert5')" class="bg-cyber-green text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-opacity-90 transition-all"> Verify </button>
+      <p class="text-gray-500 text-xs font-mono">SIEM &amp; log analysis</p>
      </div>
     </div>
    </div>
-  </section><!-- Skills Section -->
-  <section id="skills" class="py-16 bg-white">
-   <div class="max-w-6xl mx-auto px-4">
-    <h2 class="text-4xl font-bold text-center mb-12 gradient-text">Skills &amp; Expertise</h2>
-    <div class="space-y-8"><!-- Programming Languages -->
-     <div class="bg-light-green p-8 rounded-xl">
-      <h3 class="text-2xl font-bold text-dark-green mb-6 flex items-center">
-       <svg class="w-8 h-8 mr-3 text-cyber-green" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-       </svg> Programming Languages</h3>
-      <div class="flex flex-wrap gap-3"><span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">C</span> <span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">Python</span> <span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">HTML</span> <span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">JavaScript</span> <span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">CSS</span> <span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">Bash</span> <span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">MySQL</span> <span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">PowerShell</span>
+  </section><!-- Skills -->
+  <section id="skills" class="py-20 px-4 relative z-10">
+   <div class="max-w-5xl mx-auto">
+    <div class="font-mono text-cyber text-sm mb-2 tracking-wider">
+     &gt; ls ./skills/
+    </div>
+    <h2 class="text-3xl font-bold text-white mb-10">Technical Arsenal<span class="text-cyber">_</span></h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+     <!-- Programming -->
+     <div class="terminal-card glow-border">
+      <div class="terminal-header">
+       <div class="terminal-dot bg-red-500"></div>
+       <div class="terminal-dot bg-yellow-500"></div>
+       <div class="terminal-dot bg-green-500"></div><span class="font-mono text-xs text-gray-500 ml-2">programming_languages.sh</span>
       </div>
-     </div><!-- Software Tools -->
-     <div class="bg-light-green p-8 rounded-xl">
-      <h3 class="text-2xl font-bold text-dark-green mb-6 flex items-center">
-       <svg class="w-8 h-8 mr-3 text-cyber-green" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"></path>
-       </svg> Software Tools</h3>
-      <div class="flex flex-wrap gap-3"><span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">Wireshark</span> <span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">Linux</span> <span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">Nmap</span> <span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">Burp Suite</span> <span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">Splunk</span> <span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">Metasploit</span> <span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">Bloodhound</span> <span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">IDA Pro</span> <span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">Ansible</span> <span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">AWS</span> <span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">n8n</span>
+      <div class="p-4 flex flex-wrap gap-2">
+       <span class="skill-tag">C</span><span class="skill-tag">Python</span><span class="skill-tag">JavaScript</span><span class="skill-tag">HTML/CSS</span><span class="skill-tag">Bash</span><span class="skill-tag">MySQL</span><span class="skill-tag">PowerShell</span>
+      </div>
+     </div><!-- Tools -->
+     <div class="terminal-card glow-border">
+      <div class="terminal-header">
+       <div class="terminal-dot bg-red-500"></div>
+       <div class="terminal-dot bg-yellow-500"></div>
+       <div class="terminal-dot bg-green-500"></div><span class="font-mono text-xs text-gray-500 ml-2">security_tools.sh</span>
+      </div>
+      <div class="p-4 flex flex-wrap gap-2">
+       <span class="skill-tag">Wireshark</span><span class="skill-tag">Nmap</span><span class="skill-tag">Burp Suite</span><span class="skill-tag">Splunk</span><span class="skill-tag">Metasploit</span><span class="skill-tag">BloodHound</span><span class="skill-tag">IDA Pro</span><span class="skill-tag">Ansible</span><span class="skill-tag">AWS</span><span class="skill-tag">n8n</span>
       </div>
      </div><!-- Networking -->
-     <div class="bg-light-green p-8 rounded-xl">
-      <h3 class="text-2xl font-bold text-dark-green mb-6 flex items-center">
-       <svg class="w-8 h-8 mr-3 text-cyber-green" fill="currentColor" viewbox="0 0 20 20"><path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"></path>
-       </svg> Networking</h3>
-      <div class="flex flex-wrap gap-3"><span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">TCP/IP</span> <span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">DNS</span> <span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">DHCP</span> <span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">VPNs (OpenVPN, IPsec)</span> <span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">VLANs</span> <span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">Firewalls</span> <span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">Cisco Packet Tracer</span>
+     <div class="terminal-card glow-border">
+      <div class="terminal-header">
+       <div class="terminal-dot bg-red-500"></div>
+       <div class="terminal-dot bg-yellow-500"></div>
+       <div class="terminal-dot bg-green-500"></div><span class="font-mono text-xs text-gray-500 ml-2">networking.conf</span>
       </div>
-     </div><!-- Operating Systems & Cloud -->
-     <div class="bg-light-green p-8 rounded-xl">
-      <h3 class="text-2xl font-bold text-dark-green mb-6 flex items-center">
-       <svg class="w-8 h-8 mr-3 text-cyber-green" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M3 5a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2h-2.22l.123.489.804.804A1 1 0 0113 18H7a1 1 0 01-.707-1.707l.804-.804L7.22 15H5a2 2 0 01-2-2V5zm5.771 7H5V5h10v7H8.771z" clip-rule="evenodd"></path>
-       </svg> Operating Systems &amp; Cloud</h3>
-      <div class="flex flex-wrap gap-3"><span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">Windows Server</span> <span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">Ubuntu Linux</span> <span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">Kali Linux</span> <span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">Active Directory</span> <span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">AWS Security</span>
+      <div class="p-4 flex flex-wrap gap-2">
+       <span class="skill-tag">TCP/IP</span><span class="skill-tag">DNS</span><span class="skill-tag">DHCP</span><span class="skill-tag">VPN</span><span class="skill-tag">VLANs</span><span class="skill-tag">Firewalls</span><span class="skill-tag">Cisco Packet Tracer</span>
       </div>
-     </div><!-- Cybersecurity Practice -->
-     <div class="bg-light-green p-8 rounded-xl">
-      <h3 class="text-2xl font-bold text-dark-green mb-6 flex items-center">
-       <svg class="w-8 h-8 mr-3 text-cyber-green" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M18 8a6 6 0 01-7.743 5.743L10 14l-0.257-0.257A6 6 0 0118 8zM2 8a6 6 0 017.743-5.743L10 2l0.257 0.257A6 6 0 012 8zm8 2a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
-       </svg> Cybersecurity Practice</h3>
-      <div class="flex flex-wrap gap-3"><span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">Capture the Flag (CTF)</span> <span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">HackTheBox</span> <span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">Ethical Hacking Labs</span> <span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">Security Research</span>
+     </div><!-- OS & Cloud -->
+     <div class="terminal-card glow-border">
+      <div class="terminal-header">
+       <div class="terminal-dot bg-red-500"></div>
+       <div class="terminal-dot bg-yellow-500"></div>
+       <div class="terminal-dot bg-green-500"></div><span class="font-mono text-xs text-gray-500 ml-2">os_and_cloud.yml</span>
       </div>
-     </div><!-- Languages -->
-     <div class="bg-light-green p-8 rounded-xl">
-      <h3 class="text-2xl font-bold text-dark-green mb-6 flex items-center">
-       <svg class="w-8 h-8 mr-3 text-cyber-green" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M7 2a1 1 0 011 1v1h3a1 1 0 110 2H9.578a18.87 18.87 0 01-1.724 4.78c.29.354.596.696.914 1.026a1 1 0 11-1.44 1.389c-.188-.196-.373-.396-.554-.6a19.098 19.098 0 01-3.107 3.567 1 1 0 01-1.334-1.49 17.087 17.087 0 003.13-3.733 18.992 18.992 0 01-1.487-2.494 1 1 0 111.79-.89c.234.47.489.928.764 1.372.417-.934.752-1.913.997-2.927H3a1 1 0 110-2h3V3a1 1 0 011-1zm6 6a1 1 0 01.894.553l2.991 5.982a.869.869 0 01.02.037l.99 1.98a1 1 0 11-1.79.895L15.383 16h-4.764l-.724 1.447a1 1 0 11-1.788-.894l.99-1.98.019-.038 2.99-5.982A1 1 0 0113 8zm-1.382 6h2.764L13 11.236 11.618 14z" clip-rule="evenodd"></path>
-       </svg> Languages</h3>
-      <div class="flex flex-wrap gap-3"><span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">English</span> <span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">Italian</span> <span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">Telugu</span> <span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">Hindi</span> <span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">Tamil</span> <span class="bg-white text-dark-green px-4 py-2 rounded-lg font-semibold shadow">Kannada</span>
+      <div class="p-4 flex flex-wrap gap-2">
+       <span class="skill-tag">Windows Server</span><span class="skill-tag">Ubuntu</span><span class="skill-tag">Kali Linux</span><span class="skill-tag">Active Directory</span><span class="skill-tag">AWS Security</span>
+      </div>
+     </div>
+    </div><!-- Languages -->
+    <div class="mt-6 terminal-card glow-border">
+     <div class="terminal-header">
+      <div class="terminal-dot bg-red-500"></div>
+      <div class="terminal-dot bg-yellow-500"></div>
+      <div class="terminal-dot bg-green-500"></div><span class="font-mono text-xs text-gray-500 ml-2">languages.txt</span>
+     </div>
+     <div class="p-4 flex flex-wrap gap-2">
+      <span class="skill-tag">English</span><span class="skill-tag">Italian</span><span class="skill-tag">Telugu</span><span class="skill-tag">Hindi</span><span class="skill-tag">Tamil</span><span class="skill-tag">Kannada</span>
+     </div>
+    </div>
+   </div>
+  </section><!-- Projects -->
+  <section id="projects" class="py-20 px-4 relative z-10">
+   <div class="max-w-5xl mx-auto">
+    <div class="font-mono text-cyber text-sm mb-2 tracking-wider">
+     &gt; ls ./projects/
+    </div>
+    <h2 class="text-3xl font-bold text-white mb-10">Projects<span class="text-cyber">_</span></h2>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+     <!-- Project 1 -->
+     <div class="project-card terminal-card glow-border">
+      <div class="terminal-header">
+       <div class="terminal-dot bg-red-500"></div>
+       <div class="terminal-dot bg-yellow-500"></div>
+       <div class="terminal-dot bg-green-500"></div><span class="font-mono text-xs text-gray-500 ml-2">phishing_detection.py</span>
+      </div>
+      <div class="p-5">
+       <div class="flex items-center gap-2 mb-3">
+        <i data-lucide="brain" style="width:18px;height:18px;color:#0BDA51"></i>
+        <h3 class="text-white font-bold">Adaptive Phishing Detection (NLP)</h3>
+       </div>
+       <ul class="space-y-2 text-sm text-gray-400">
+        <li class="flex gap-2"><span class="text-cyber mt-1">▸</span>Built AI phishing detection using NLP to analyze email content and malicious intent</li>
+        <li class="flex gap-2"><span class="text-cyber mt-1">▸</span>Trained ML model on labeled data to detect spoofing patterns and suspicious URLs</li>
+        <li class="flex gap-2"><span class="text-cyber mt-1">▸</span>Implemented real-time classification with confidence scoring and adaptive learning</li>
+        <li class="flex gap-2"><span class="text-cyber mt-1">▸</span>Improved accuracy over time by retraining with new threat patterns</li>
+       </ul>
+       <div class="mt-4 flex flex-wrap gap-2">
+        <span class="text-xs font-mono px-2 py-1 rounded bg-cyber/10 text-cyber border border-cyber/20">Python</span> <span class="text-xs font-mono px-2 py-1 rounded bg-cyber/10 text-cyber border border-cyber/20">NLP</span> <span class="text-xs font-mono px-2 py-1 rounded bg-cyber/10 text-cyber border border-cyber/20">ML</span>
+       </div>
+      </div>
+     </div><!-- Project 2 -->
+     <div class="project-card terminal-card glow-border">
+      <div class="terminal-header">
+       <div class="terminal-dot bg-red-500"></div>
+       <div class="terminal-dot bg-yellow-500"></div>
+       <div class="terminal-dot bg-green-500"></div><span class="font-mono text-xs text-gray-500 ml-2">trustface.py</span>
+      </div>
+      <div class="p-5">
+       <div class="flex items-center gap-2 mb-3">
+        <i data-lucide="scan-face" style="width:18px;height:18px;color:#0BDA51"></i>
+        <h3 class="text-white font-bold">TrustFace</h3>
+       </div>
+       <ul class="space-y-2 text-sm text-gray-400">
+        <li class="flex gap-2"><span class="text-cyber mt-1">▸</span>Developed offline face-recognition lock securing devices without internet</li>
+        <li class="flex gap-2"><span class="text-cyber mt-1">▸</span>Support for multiple trusted users and local audit logging</li>
+        <li class="flex gap-2"><span class="text-cyber mt-1">▸</span>OpenCV-based recognition with optimized real-time performance</li>
+        <li class="flex gap-2"><span class="text-cyber mt-1">▸</span>Prevents unauthorized access in sensitive environments</li>
+       </ul>
+       <div class="mt-4 flex flex-wrap gap-2">
+        <span class="text-xs font-mono px-2 py-1 rounded bg-cyber/10 text-cyber border border-cyber/20">Python</span> <span class="text-xs font-mono px-2 py-1 rounded bg-cyber/10 text-cyber border border-cyber/20">OpenCV</span> <span class="text-xs font-mono px-2 py-1 rounded bg-cyber/10 text-cyber border border-cyber/20">Security</span>
+       </div>
+      </div>
+     </div><!-- Project 3 -->
+     <div class="project-card terminal-card glow-border lg:col-span-2">
+      <div class="terminal-header">
+       <div class="terminal-dot bg-red-500"></div>
+       <div class="terminal-dot bg-yellow-500"></div>
+       <div class="terminal-dot bg-green-500"></div><span class="font-mono text-xs text-gray-500 ml-2">ad_pentest_automation.sh</span>
+      </div>
+      <div class="p-5">
+       <div class="flex items-center gap-2 mb-3">
+        <i data-lucide="terminal" style="width:18px;height:18px;color:#0BDA51"></i>
+        <h3 class="text-white font-bold">Active Directory Penetration Testing Automation</h3>
+       </div>
+       <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6">
+        <ul class="space-y-2 text-sm text-gray-400">
+         <li class="flex gap-2"><span class="text-cyber mt-1">▸</span>Automated AD pentesting using Nmap, CrackMapExec, SMB relay, and PsExec</li>
+         <li class="flex gap-2"><span class="text-cyber mt-1">▸</span>Ensured consistent, repeatable testing reducing manual effort</li>
+        </ul>
+        <ul class="space-y-2 text-sm text-gray-400">
+         <li class="flex gap-2"><span class="text-cyber mt-1">▸</span>Used BloodHound to visualize attack paths in actionable reports</li>
+         <li class="flex gap-2"><span class="text-cyber mt-1">▸</span>Automated credential spraying and privilege escalation simulations</li>
+        </ul>
+       </div>
+       <div class="mt-4 flex flex-wrap gap-2">
+        <span class="text-xs font-mono px-2 py-1 rounded bg-cyber/10 text-cyber border border-cyber/20">Bash</span> <span class="text-xs font-mono px-2 py-1 rounded bg-cyber/10 text-cyber border border-cyber/20">Nmap</span> <span class="text-xs font-mono px-2 py-1 rounded bg-cyber/10 text-cyber border border-cyber/20">BloodHound</span> <span class="text-xs font-mono px-2 py-1 rounded bg-cyber/10 text-cyber border border-cyber/20">CrackMapExec</span> <span class="text-xs font-mono px-2 py-1 rounded bg-cyber/10 text-cyber border border-cyber/20">Active Directory</span>
+       </div>
       </div>
      </div>
     </div>
    </div>
-  </section><!-- Education Section -->
-  <section id="education" class="py-16 bg-light-green">
-   <div class="max-w-6xl mx-auto px-4">
-    <h2 class="text-4xl font-bold text-center mb-12 gradient-text">Education</h2>
-    <div class="grid md:grid-cols-2 gap-8">
-     <div class="bg-white p-8 rounded-xl shadow-lg card-hover">
-      <div class="flex items-center mb-4">
-       <div class="w-12 h-12 bg-cyber-green rounded-full flex items-center justify-center mr-4">
-        <svg class="w-6 h-6 text-white" fill="currentColor" viewbox="0 0 20 20"><path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"></path>
-        </svg>
-       </div>
-       <div>
-        <h3 class="text-xl font-bold text-dark-green">Saint Peter's University</h3>
-        <p class="text-gray-600">Jersey City, NJ</p>
-       </div>
-      </div>
-      <div class="mb-4">
-       <p class="text-lg font-semibold text-dark-green">MSc in Cybersecurity</p>
-       <p class="text-cyber-green font-bold text-xl">GPA: 4.0</p>
-       <p class="text-gray-600 font-medium">Feb 2024 - May 2025</p>
-      </div>
-      <div>
-       <p class="font-semibold text-dark-green mb-2">Relevant Coursework:</p>
-       <div class="flex flex-wrap gap-2"><span class="bg-cyber-green bg-opacity-20 text-dark-green px-3 py-1 rounded-full text-sm">Digital Forensics</span> <span class="bg-cyber-green bg-opacity-20 text-dark-green px-3 py-1 rounded-full text-sm">Ethical Hacking</span> <span class="bg-cyber-green bg-opacity-20 text-dark-green px-3 py-1 rounded-full text-sm">Blockchain</span>
-       </div>
-      </div>
-     </div>
-     <div class="bg-white p-8 rounded-xl shadow-lg card-hover">
-      <div class="flex items-center mb-4">
-       <div class="w-12 h-12 bg-dark-green rounded-full flex items-center justify-center mr-4">
-        <svg class="w-6 h-6 text-white" fill="currentColor" viewbox="0 0 20 20"><path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"></path>
-        </svg>
-       </div>
-       <div>
-        <h3 class="text-xl font-bold text-dark-green">Presidency University</h3>
-        <p class="text-gray-600">Bangalore, India</p>
-       </div>
-      </div>
-      <div class="mb-4">
-       <p class="text-lg font-semibold text-dark-green">BSc in Computer Science</p>
-       <p class="text-cyber-green font-bold text-xl">GPA: 3.6</p>
-       <p class="text-gray-600 font-medium">August 2018 - June 2023</p>
-      </div>
-      <div>
-       <p class="font-semibold text-dark-green mb-2">Relevant Coursework:</p>
-       <div class="flex flex-wrap gap-2"><span class="bg-dark-green bg-opacity-20 text-dark-green px-3 py-1 rounded-full text-sm">Data Structures &amp; Algorithms</span> <span class="bg-dark-green bg-opacity-20 text-dark-green px-3 py-1 rounded-full text-sm">Computer Programming</span> <span class="bg-dark-green bg-opacity-20 text-dark-green px-3 py-1 rounded-full text-sm">Operating Systems</span>
-       </div>
-      </div>
-     </div>
+  </section><!-- Experience -->
+  <section id="experience" class="py-20 px-4 relative z-10">
+   <div class="max-w-5xl mx-auto">
+    <div class="font-mono text-cyber text-sm mb-2 tracking-wider">
+     &gt; cat work_history.log
     </div>
-   </div>
-  </section><!-- Work Experience Section -->
-  <section id="experience" class="py-16 bg-white">
-   <div class="max-w-6xl mx-auto px-4">
-    <h2 class="text-4xl font-bold text-center mb-12 gradient-text">Work Experience</h2>
-    <div class="bg-light-green p-8 rounded-xl shadow-lg">
-     <div class="flex items-start mb-6">
-      <div class="w-16 h-16 bg-cyber-green rounded-full flex items-center justify-center mr-6 flex-shrink-0">
-       <svg class="w-8 h-8 text-white" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clip-rule="evenodd"></path> <path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z"></path>
-       </svg>
+    <h2 class="text-3xl font-bold text-white mb-10">Experience<span class="text-cyber">_</span></h2>
+    <div class="space-y-0 relative">
+     <div class="absolute left-4 md:left-6 top-0 bottom-0 timeline-line"></div><!-- Job 1 -->
+     <div class="relative pl-12 md:pl-16 pb-12">
+      <div class="absolute left-2.5 md:left-4.5 top-1 w-3 h-3 rounded-full bg-cyber border-2 border-dark-900" style="box-shadow: 0 0 10px rgba(11,218,81,0.5);"></div>
+      <div class="terminal-card glow-border p-5">
+       <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-3">
+        <h3 class="text-white font-bold text-lg">Security Engineer</h3><span class="font-mono text-xs text-cyber/70">Mar 2026 – Present</span>
+       </div>
+       <p class="font-mono text-sm text-gray-500 mb-3">Company 1 — NJ, USA</p>
+       <ul class="space-y-2 text-sm text-gray-400">
+        <li class="flex gap-2"><span class="text-cyber mt-1">▸</span>Defined security and privacy standards aligned with organizational policies</li>
+        <li class="flex gap-2"><span class="text-cyber mt-1">▸</span>Used SAST/DAST tools and manual testing to identify application vulnerabilities</li>
+        <li class="flex gap-2"><span class="text-cyber mt-1">▸</span>Assessed application risks and suggested mitigation actions</li>
+        <li class="flex gap-2"><span class="text-cyber mt-1">▸</span>Shared security best practices to improve secure development</li>
+       </ul>
       </div>
-      <div class="flex-grow">
-       <h3 class="text-2xl font-bold text-dark-green mb-2">Cybersecurity Intern – Log Analysis with Splunk</h3>
-       <p class="text-cyber-green font-semibold text-lg mb-1">Saint Peter's University</p>
-       <p class="text-gray-600 mb-4">Jersey City, NJ, USA</p>
-       <ul class="space-y-3">
-        <li class="flex items-start">
-         <svg class="w-5 h-5 text-cyber-green mr-3 mt-1 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-         </svg><span class="text-gray-700">Analysed DDoS attack logs from multiple IPs attempting various user credentials across different resources</span></li>
-        <li class="flex items-start">
-         <svg class="w-5 h-5 text-cyber-green mr-3 mt-1 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-         </svg><span class="text-gray-700">Built Splunk filters for source IPs, compromised accounts, and credentials used in successful logins</span></li>
-        <li class="flex items-start">
-         <svg class="w-5 h-5 text-cyber-green mr-3 mt-1 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-         </svg><span class="text-gray-700">Investigated e-commerce logs to track vendors, products, payments, and abandoned shopping carts</span></li>
-        <li class="flex items-start">
-         <svg class="w-5 h-5 text-cyber-green mr-3 mt-1 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-         </svg><span class="text-gray-700">Created dashboards and reports summarizing anomalies, queries, and security insights for stakeholders</span></li>
+     </div><!-- Job 2 -->
+     <div class="relative pl-12 md:pl-16 pb-12">
+      <div class="absolute left-2.5 md:left-4.5 top-1 w-3 h-3 rounded-full bg-cyber/50 border-2 border-dark-900"></div>
+      <div class="terminal-card glow-border p-5">
+       <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-3">
+        <h3 class="text-white font-bold text-lg">Software Developer Intern</h3><span class="font-mono text-xs text-cyber/70">Oct 2025 – Mar 2026</span>
+       </div>
+       <p class="font-mono text-sm text-gray-500 mb-3">Company 2 — Woodbridge, NJ, USA</p>
+       <ul class="space-y-2 text-sm text-gray-400">
+        <li class="flex gap-2"><span class="text-cyber mt-1">▸</span>Developed secure backend features with authentication and input validation</li>
+        <li class="flex gap-2"><span class="text-cyber mt-1">▸</span>Implemented API design, encrypted data handling, and RBAC</li>
+        <li class="flex gap-2"><span class="text-cyber mt-1">▸</span>Integrated logging and monitoring for security auditing</li>
+        <li class="flex gap-2"><span class="text-cyber mt-1">▸</span>Collaborated with security teams on code review and secure coding standards</li>
+       </ul>
+      </div>
+     </div><!-- Job 3 -->
+     <div class="relative pl-12 md:pl-16 pb-12">
+      <div class="absolute left-2.5 md:left-4.5 top-1 w-3 h-3 rounded-full bg-cyber/50 border-2 border-dark-900"></div>
+      <div class="terminal-card glow-border p-5">
+       <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-3">
+        <h3 class="text-white font-bold text-lg">Cybersecurity Intern</h3><span class="font-mono text-xs text-cyber/70">Jan 2025 – May 2025</span>
+       </div>
+       <p class="font-mono text-sm text-gray-500 mb-3">Saint Peter's University — Jersey City, NJ, USA</p>
+       <ul class="space-y-2 text-sm text-gray-400">
+        <li class="flex gap-2"><span class="text-cyber mt-1">▸</span>Managed Splunk dashboards and log monitoring workflows to support security investigations</li>
+        <li class="flex gap-2"><span class="text-cyber mt-1">▸</span>Analyzed DDoS attack logs from multiple IPs attempting various user credentials</li>
+        <li class="flex gap-2"><span class="text-cyber mt-1">▸</span>Built Splunk filters for source IPs, compromised accounts, and successful login credentials</li>
+        <li class="flex gap-2"><span class="text-cyber mt-1">▸</span>Investigated e-commerce logs tracking vendors, products, payments, and shopping patterns</li>
+       </ul>
+      </div>
+     </div><!-- Job 4 -->
+     <div class="relative pl-12 md:pl-16 pb-4">
+      <div class="absolute left-2.5 md:left-4.5 top-1 w-3 h-3 rounded-full bg-cyber/50 border-2 border-dark-900"></div>
+      <div class="terminal-card glow-border p-5">
+       <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-3">
+        <h3 class="text-white font-bold text-lg">Software Associate Intern</h3><span class="font-mono text-xs text-cyber/70">Aug 2022 – Jan 2024</span>
+       </div>
+       <p class="font-mono text-sm text-gray-500 mb-3">Retail Corporation of India Ltd — Bangalore, KA, India</p>
+       <ul class="space-y-2 text-sm text-gray-400">
+        <li class="flex gap-2"><span class="text-cyber mt-1">▸</span>Assisted in developing and maintaining application features with focus on secure coding</li>
+        <li class="flex gap-2"><span class="text-cyber mt-1">▸</span>Supported integration of authentication mechanisms and security controls in web applications</li>
+        <li class="flex gap-2"><span class="text-cyber mt-1">▸</span>Worked with cross-functional teams to troubleshoot, debug, and improve application stability</li>
+        <li class="flex gap-2"><span class="text-cyber mt-1">▸</span>Identified and addressed potential security and performance issues to improve code quality</li>
        </ul>
       </div>
      </div>
     </div>
    </div>
-  </section><!-- Projects Section -->
-  <section id="projects" class="py-16 bg-light-green">
-   <div class="max-w-6xl mx-auto px-4">
-    <h2 class="text-4xl font-bold text-center mb-12 gradient-text">Featured Projects</h2>
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8"><!-- Project 1: TrustFace -->
-     <div class="bg-white p-6 rounded-xl shadow-lg card-hover">
-      <div class="flex items-center mb-4">
-       <div class="w-10 h-10 bg-cyber-green rounded-lg flex items-center justify-center mr-3">
-        <svg class="w-5 h-5 text-white" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M18 8a6 6 0 01-7.743 5.743L10 14l-0.257-0.257A6 6 0 0118 8zM2 8a6 6 0 017.743-5.743L10 2l0.257 0.257A6 6 0 012 8zm8 2a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
-        </svg>
-       </div>
-       <h3 class="text-xl font-bold text-dark-green">TrustFace</h3>
+  </section><!-- Education -->
+  <section id="education" class="py-20 px-4 relative z-10">
+   <div class="max-w-5xl mx-auto">
+    <div class="font-mono text-cyber text-sm mb-2 tracking-wider">
+     &gt; cat education.log
+    </div>
+    <h2 class="text-3xl font-bold text-white mb-10">Education<span class="text-cyber">_</span></h2>
+    <div class="space-y-6"><!-- Master's Degree -->
+     <div class="terminal-card glow-border p-6">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-3">
+       <div>
+        <h3 class="text-white font-bold text-lg">MSc in Cybersecurity</h3>
+        <p class="font-mono text-sm text-gray-500 mt-1">Saint Peter's University — Jersey City, NJ</p>
+       </div><span class="font-mono text-xs text-cyber/70 mt-2 sm:mt-0">Feb 2024 – May 2025</span>
       </div>
-      <p class="text-gray-700 mb-4">Developed an offline face-recognition lock that secures devices by locking when an authorized user's face is undetected.</p>
-      <ul class="space-y-2 mb-4">
-       <li class="flex items-start text-sm text-gray-700">
-        <svg class="w-4 h-4 text-cyber-green mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-        </svg><span>Fully on-device without internet, supporting multiple trusted users</span></li>
-       <li class="flex items-start text-sm text-gray-700">
-        <svg class="w-4 h-4 text-cyber-green mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-        </svg><span>OpenCV-based recognition with optimized real-time detection</span></li>
-       <li class="flex items-start text-sm text-gray-700">
-        <svg class="w-4 h-4 text-cyber-green mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-        </svg><span>Prevents unauthorized access with audit-ready records</span></li>
-      </ul>
-      <div class="flex flex-wrap gap-2 mb-4"><span class="bg-light-green text-dark-green px-2 py-1 rounded text-xs">OpenCV</span> <span class="bg-light-green text-dark-green px-2 py-1 rounded text-xs">Python</span> <span class="bg-light-green text-dark-green px-2 py-1 rounded text-xs">Security</span>
-      </div><button onclick="toggleProjectDetails('project1')" class="w-full bg-cyber-green text-white px-4 py-2 rounded-lg font-semibold hover:bg-opacity-90 transition-all"> View Details </button>
-     </div><!-- Project 2: AD Pentesting -->
-     <div class="bg-white p-6 rounded-xl shadow-lg card-hover">
-      <div class="flex items-center mb-4">
-       <div class="w-10 h-10 bg-dark-green rounded-lg flex items-center justify-center mr-3">
-        <svg class="w-5 h-5 text-white" fill="currentColor" viewbox="0 0 20 20"><path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"></path>
-        </svg>
-       </div>
-       <h3 class="text-xl font-bold text-dark-green">Automated AD Pentesting</h3>
+      <div class="flex items-center gap-2 mb-3"><span class="px-3 py-1 rounded text-xs font-mono bg-cyber/10 text-cyber border border-cyber/20">GPA: 4.0</span>
       </div>
-      <p class="text-gray-700 mb-4">Automated Active Directory penetration testing using Nmap, CrackMapExec, SMB relay, and PsExec within the environment.</p>
-      <ul class="space-y-2 mb-4">
-       <li class="flex items-start text-sm text-gray-700">
-        <svg class="w-4 h-4 text-cyber-green mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-        </svg><span>Consistent, repeatable testing reducing manual effort</span></li>
-       <li class="flex items-start text-sm text-gray-700">
-        <svg class="w-4 h-4 text-cyber-green mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-        </svg><span>BloodHound visualization of attack paths</span></li>
-       <li class="flex items-start text-sm text-gray-700">
-        <svg class="w-4 h-4 text-cyber-green mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-        </svg><span>Automated credential spraying and privilege escalation</span></li>
-      </ul>
-      <div class="flex flex-wrap gap-2 mb-4"><span class="bg-light-green text-dark-green px-2 py-1 rounded text-xs">BloodHound</span> <span class="bg-light-green text-dark-green px-2 py-1 rounded text-xs">CrackMapExec</span> <span class="bg-light-green text-dark-green px-2 py-1 rounded text-xs">Nmap</span>
-      </div><button onclick="toggleProjectDetails('project2')" class="w-full bg-dark-green text-white px-4 py-2 rounded-lg font-semibold hover:bg-opacity-90 transition-all"> View Details </button>
-     </div><!-- Project 3: Secure Voting App -->
-     <div class="bg-white p-6 rounded-xl shadow-lg card-hover">
-      <div class="flex items-center mb-4">
-       <div class="w-10 h-10 bg-cyber-green rounded-lg flex items-center justify-center mr-3">
-        <svg class="w-5 h-5 text-white" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-        </svg>
-       </div>
-       <h3 class="text-xl font-bold text-dark-green">Secure Voting App</h3>
+      <p class="text-sm text-gray-400 mb-3 font-mono">Relevant Coursework:</p>
+      <div class="flex flex-wrap gap-2"><span class="text-xs font-mono px-2 py-1 rounded bg-dark-700 text-gray-300 border border-dark-600">Digital Forensics</span> <span class="text-xs font-mono px-2 py-1 rounded bg-dark-700 text-gray-300 border border-dark-600">Ethical Hacking</span> <span class="text-xs font-mono px-2 py-1 rounded bg-dark-700 text-gray-300 border border-dark-600">Blockchain</span>
       </div>
-      <p class="text-gray-700 mb-4">Designed and implemented a secure voting app using Google OAuth for authentication and SQLite for vote storage.</p>
-      <ul class="space-y-2 mb-4">
-       <li class="flex items-start text-sm text-gray-700">
-        <svg class="w-4 h-4 text-cyber-green mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-        </svg><span>Secure platform for small-scale elections or surveys</span></li>
-       <li class="flex items-start text-sm text-gray-700">
-        <svg class="w-4 h-4 text-cyber-green mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-        </svg><span>AES encryption for vote data and session tokens</span></li>
-       <li class="flex items-start text-sm text-gray-700">
-        <svg class="w-4 h-4 text-cyber-green mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-        </svg><span>API tested with Docker and Postman preventing duplicate votes</span></li>
-      </ul>
-      <div class="flex flex-wrap gap-2 mb-4"><span class="bg-light-green text-dark-green px-2 py-1 rounded text-xs">OAuth</span> <span class="bg-light-green text-dark-green px-2 py-1 rounded text-xs">SQLite</span> <span class="bg-light-green text-dark-green px-2 py-1 rounded text-xs">AES Encryption</span>
-      </div><button onclick="toggleProjectDetails('project3')" class="w-full bg-cyber-green text-white px-4 py-2 rounded-lg font-semibold hover:bg-opacity-90 transition-all"> View Details </button>
+     </div><!-- Bachelor's Degree -->
+     <div class="terminal-card glow-border p-6">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-3">
+       <div>
+        <h3 class="text-white font-bold text-lg">BSc in Computer Science</h3>
+        <p class="font-mono text-sm text-gray-500 mt-1">Presidency University — Bangalore, India</p>
+       </div><span class="font-mono text-xs text-cyber/70 mt-2 sm:mt-0">August 2018 – June 2023</span>
+      </div>
+      <div class="flex items-center gap-2 mb-3"><span class="px-3 py-1 rounded text-xs font-mono bg-cyber/10 text-cyber border border-cyber/20">GPA: 3.6</span>
+      </div>
+      <p class="text-sm text-gray-400 mb-3 font-mono">Relevant Coursework:</p>
+      <div class="flex flex-wrap gap-2"><span class="text-xs font-mono px-2 py-1 rounded bg-dark-700 text-gray-300 border border-dark-600">Data Structures &amp; Algorithms</span> <span class="text-xs font-mono px-2 py-1 rounded bg-dark-700 text-gray-300 border border-dark-600">Computer Programming</span> <span class="text-xs font-mono px-2 py-1 rounded bg-dark-700 text-gray-300 border border-dark-600">Operating Systems</span>
+      </div>
      </div>
     </div>
    </div>
-  </section><!-- Project Details Section -->
-  <section id="project-details" class="py-16 bg-white hidden">
-   <div class="max-w-6xl mx-auto px-4">
-    <div class="flex justify-between items-center mb-8">
-     <h2 class="text-4xl font-bold gradient-text">Project Details</h2><button onclick="closeProjectDetails()" class="bg-dark-green text-white px-6 py-2 rounded-lg font-semibold hover:bg-opacity-90 transition-all"> Close </button>
-    </div><!-- Project 1 Details -->
-    <div id="project1-details" class="hidden project-detail-content">
-     <div class="bg-light-green p-8 rounded-xl shadow-lg">
-      <h3 class="text-3xl font-bold text-dark-green mb-6">TrustFace - Face Recognition Lock</h3>
-      <div class="grid md:grid-cols-2 gap-4 mb-6">
-       <div class="bg-white p-4 rounded-lg border-2 border-cyber-green min-h-64 flex items-center justify-center">
-        <p class="text-gray-500 text-center">Add your screenshot or video here</p>
-       </div>
-       <div class="bg-white p-4 rounded-lg border-2 border-cyber-green min-h-64 flex items-center justify-center">
-        <p class="text-gray-500 text-center">Add your screenshot or video here</p>
-       </div>
-      </div>
-      <p class="text-gray-700 leading-relaxed">Place additional details, technical specifications, or project outcomes here.</p>
-     </div>
-    </div><!-- Project 2 Details -->
-    <div id="project2-details" class="hidden project-detail-content">
-     <div class="bg-light-green p-8 rounded-xl shadow-lg">
-      <h3 class="text-3xl font-bold text-dark-green mb-6">Automated AD Penetration Testing</h3>
-      <div class="grid md:grid-cols-2 gap-4 mb-6">
-       <div class="bg-white p-4 rounded-lg border-2 border-dark-green min-h-64 flex items-center justify-center">
-        <p class="text-gray-500 text-center">Add your screenshot or video here</p>
-       </div>
-       <div class="bg-white p-4 rounded-lg border-2 border-dark-green min-h-64 flex items-center justify-center">
-        <p class="text-gray-500 text-center">Add your screenshot or video here</p>
-       </div>
-      </div>
-      <p class="text-gray-700 leading-relaxed">Place additional details, technical specifications, or project outcomes here.</p>
-     </div>
-    </div><!-- Project 3 Details -->
-    <div id="project3-details" class="hidden project-detail-content">
-     <div class="bg-light-green p-8 rounded-xl shadow-lg">
-      <h3 class="text-3xl font-bold text-dark-green mb-6">Secure Voting Application</h3>
-      <div class="grid md:grid-cols-2 gap-4 mb-6">
-       <div class="bg-white p-4 rounded-lg border-2 border-cyber-green min-h-64 flex items-center justify-center">
-        <p class="text-gray-500 text-center">Add your screenshot or video here</p>
-       </div>
-       <div class="bg-white p-4 rounded-lg border-2 border-cyber-green min-h-64 flex items-center justify-center">
-        <p class="text-gray-500 text-center">Add your screenshot or video here</p>
-       </div>
-      </div>
-      <p class="text-gray-700 leading-relaxed">Place additional details, technical specifications, or project outcomes here.</p>
-     </div>
+  </section><!-- Professional Development -->
+  <section id="development" class="py-20 px-4 relative z-10">
+   <div class="max-w-5xl mx-auto">
+    <div class="font-mono text-cyber text-sm mb-2 tracking-wider">
+     &gt; cat professional_development.txt
     </div>
-   </div>
-  </section><!-- Activities & Interests -->
-  <section class="py-16 bg-white">
-   <div class="max-w-6xl mx-auto px-4">
-    <div class="grid md:grid-cols-2 gap-12">
-     <div>
-      <h2 class="text-3xl font-bold mb-8 gradient-text">Extracurricular Activities</h2>
-      <div class="space-y-6">
-       <div class="flex items-start">
-        <div class="w-8 h-8 bg-cyber-green rounded-full flex items-center justify-center mr-4 mt-1 flex-shrink-0">
-         <svg class="w-4 h-4 text-white" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-         </svg>
-        </div>
-        <div>
-         <h3 class="font-bold text-dark-green">Hackathon Participant</h3>
-         <p class="text-gray-700">Competed in university and online hackathons focused on ethical hacking and secure app development</p>
-        </div>
+    <h2 class="text-3xl font-bold text-white mb-10">Professional Development<span class="text-cyber">_</span></h2>
+    <div class="terminal-card glow-border p-6">
+     <div class="space-y-4">
+      <div class="flex gap-3">
+       <div class="text-cyber mt-1">
+        ▸
        </div>
-       <div class="flex items-start">
-        <div class="w-8 h-8 bg-cyber-green rounded-full flex items-center justify-center mr-4 mt-1 flex-shrink-0">
-         <svg class="w-4 h-4 text-white" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-         </svg>
-        </div>
-        <div>
-         <h3 class="font-bold text-dark-green">Cybersecurity Club Member</h3>
-         <p class="text-gray-700">Participated in Capture The Flag (CTF) events and security workshops</p>
-        </div>
-       </div>
-       <div class="flex items-start">
-        <div class="w-8 h-8 bg-cyber-green rounded-full flex items-center justify-center mr-4 mt-1 flex-shrink-0">
-         <svg class="w-4 h-4 text-white" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-         </svg>
-        </div>
-        <div>
-         <h3 class="font-bold text-dark-green">Open Source Contributor</h3>
-         <p class="text-gray-700">Contributed code and documentation to cybersecurity-related GitHub projects</p>
-        </div>
+       <div>
+        <p class="text-white font-semibold text-sm mb-1">RHCSA Certification</p>
+        <p class="text-gray-400 text-sm">Actively preparing for Red Hat Certified System Administrator certification and exploring cloud security tools (AWS, Ansible).</p>
        </div>
       </div>
-     </div>
-     <div>
-      <h2 class="text-3xl font-bold mb-8 gradient-text">Personal Interests</h2>
-      <div class="grid grid-cols-1 gap-6">
-       <div class="bg-light-green p-6 rounded-xl shadow-lg">
-        <div class="flex items-center mb-3">
-         <div class="w-10 h-10 bg-cyber-green rounded-full flex items-center justify-center mr-4"><span class="text-white text-xl">🏏</span>
-         </div>
-         <h3 class="font-bold text-dark-green">Playing Cricket</h3>
-        </div>
-        <p class="text-gray-700">Passionate about cricket and enjoy playing regularly to stay active and build teamwork skills</p>
+      <div class="flex gap-3">
+       <div class="text-cyber mt-1">
+        ▸
        </div>
-       <div class="bg-light-green p-6 rounded-xl shadow-lg">
-        <div class="flex items-center mb-3">
-         <div class="w-10 h-10 bg-dark-green rounded-full flex items-center justify-center mr-4"><span class="text-white text-xl">⚙️</span>
-         </div>
-         <h3 class="font-bold text-dark-green">Old Technologies</h3>
-        </div>
-        <p class="text-gray-700">Fascinated by learning about historical technologies and inventions that shaped our modern world</p>
+       <div>
+        <p class="text-white font-semibold text-sm mb-1">Cybersecurity Leadership</p>
+        <p class="text-gray-400 text-sm">Initiated and led university group discussions on cybersecurity threats, recent news, and industry trends, helping peers build foundational knowledge and stay updated as growing professionals.</p>
        </div>
-       <div class="bg-light-green p-6 rounded-xl shadow-lg">
-        <div class="flex items-center mb-3">
-         <div class="w-10 h-10 bg-cyber-green rounded-full flex items-center justify-center mr-4"><span class="text-white text-xl">🔬</span>
-         </div>
-         <h3 class="font-bold text-dark-green">Science Documentaries</h3>
-        </div>
-        <p class="text-gray-700">Love watching documentaries about science and technology to expand knowledge and stay curious</p>
+      </div>
+      <div class="flex gap-3">
+       <div class="text-cyber mt-1">
+        ▸
+       </div>
+       <div>
+        <p class="text-white font-semibold text-sm mb-1">AWS Purple-Team Lab</p>
+        <p class="text-gray-400 text-sm">Building a repeatable AWS purple-team lab featuring Windows AD, Linux systems, and containerized web applications. Automates MITRE ATT&amp;CK emulations, collects telemetry, and measures detection and response capabilities.</p>
+       </div>
+      </div>
+      <div class="flex gap-3">
+       <div class="text-cyber mt-1">
+        ▸
+       </div>
+       <div>
+        <p class="text-white font-semibold text-sm mb-1">Areas of Interest</p>
+        <p class="text-gray-400 text-sm">SOC analysis, network security, and automation in cybersecurity environments.</p>
        </div>
       </div>
      </div>
     </div>
    </div>
-  </section><!-- Contact Section -->
-  <section id="contact" class="py-16 bg-light-green">
-   <div class="max-w-4xl mx-auto px-4 text-center">
-    <h2 class="text-4xl font-bold mb-8 gradient-text">Let's Connect</h2>
-    <p class="text-xl text-gray-600 mb-12">Ready to discuss cybersecurity opportunities or collaborate on exciting projects?</p>
-    <div class="grid md:grid-cols-3 gap-8 mb-12">
-        <div class="bg-white p-6 rounded-xl shadow-lg">
-  <div class="w-12 h-12 bg-cyber-green rounded-full flex items-center justify-center mx-auto mb-4">
-    <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-      <path d="M20.447 20.452H17.21v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.985V9h3.104v1.561h.045c.433-.82 1.49-1.685 3.067-1.685 3.28 0 3.885 2.158 3.885 4.967v6.609zM5.337 7.433a1.804 1.804 0 110-3.608 1.804 1.804 0 010 3.608zM6.956 20.452H3.717V9h3.239v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.727v20.545C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.273V1.727C24 .774 23.2 0 22.222 0z"/>
-    </svg>
-  </div>
-  <h3 class="font-bold text-dark-green mb-2">LinkedIn</h3>
-  <p class="text-gray-600">
-    https://www.linkedin.com/in/sudhir-reddy-s-57b9b91b6/
-  </p>
-</div>
-
-     <div class="bg-white p-6 rounded-xl shadow-lg">
-      <div class="w-12 h-12 bg-cyber-green rounded-full flex items-center justify-center mx-auto mb-4">
-       <svg class="w-6 h-6 text-white" fill="currentColor" viewbox="0 0 20 20"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path> <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
-       </svg>
-      </div>
-      <h3 class="font-bold text-dark-green mb-2">Email</h3>
-      <p class="text-gray-600">sudhirreddy1312@gamil.com</p>
-     </div>
-     <div class="bg-white p-6 rounded-xl shadow-lg">
-      <div class="w-12 h-12 bg-cyber-green rounded-full flex items-center justify-center mx-auto mb-4">
-       <svg class="w-6 h-6 text-white" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M10 0C4.477 0 0 4.484 0 10.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0110 4.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.942.359.31.678.921.678 1.856 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0020 10.017C20 4.484 15.522 0 10 0z" clip-rule="evenodd"></path>
-       </svg>
-      </div>
-      <h3 class="font-bold text-dark-green mb-2">GitHub</h3>
-      <p class="text-gray-600">github.com/sudhirreddy1312</p>
-     </div>
+  </section><!-- Contact -->
+  <section id="contact" class="py-20 px-4 relative z-10">
+   <div class="max-w-3xl mx-auto text-center">
+    <div class="font-mono text-cyber text-sm mb-2 tracking-wider">
+     &gt; ./reach_out.sh
     </div>
-    <div class="flex flex-wrap justify-center gap-4"><button class="bg-cyber-green text-white px-8 py-3 rounded-lg font-semibold hover:bg-opacity-90 transition-all transform hover:scale-105" id="download-btn"> Download Resume </button> <button class="border-2 border-cyber-green text-cyber-green px-8 py-3 rounded-lg font-semibold hover:bg-cyber-green hover:text-white transition-all"> Schedule Meeting </button>
+    <h2 class="text-3xl font-bold text-white mb-4">Let's Connect<span class="text-cyber">_</span></h2>
+    <p class="text-gray-400 mb-10">Open to opportunities in security analysis, penetration testing, and network operations.</p>
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+     <div class="terminal-card glow-border p-5 flex flex-col items-center gap-2">
+      <i data-lucide="mail" style="width:24px;height:24px;color:#0BDA51"></i> <span class="font-mono text-xs text-gray-500">Email</span> <span id="contact-email" class="font-mono text-sm text-white">user@gmail.com</span>
+     </div>
+     <div class="terminal-card glow-border p-5 flex flex-col items-center gap-2">
+      <i data-lucide="phone" style="width:24px;height:24px;color:#0BDA51"></i> <span class="font-mono text-xs text-gray-500">Phone</span> <span id="contact-phone" class="font-mono text-sm text-white">+1 (111)-(111)-1111</span>
+     </div>
+     <div class="terminal-card glow-border p-5 flex flex-col items-center gap-2">
+      <i data-lucide="map-pin" style="width:24px;height:24px;color:#0BDA51"></i> <span class="font-mono text-xs text-gray-500">Location</span> <span id="contact-location" class="font-mono text-sm text-white">city, state</span>
+     </div>
     </div>
    </div>
   </section><!-- Footer -->
-  <footer class="bg-dark-green text-white py-8">
-   <div class="max-w-6xl mx-auto px-4 text-center">
-    <p class="mb-4">© 2025 Cybersecurity Portfolio. Built with passion for security and innovation.</p>
-    <div class="flex justify-center space-x-6"><a href="#" class="text-cyber-green hover:text-white transition-colors">Privacy Policy</a> <a href="#" class="text-cyber-green hover:text-white transition-colors">Terms of Service</a> <a href="#contact" class="text-cyber-green hover:text-white transition-colors">Contact</a>
+  <footer class="py-8 px-4 border-t border-dark-600 relative z-10">
+   <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+    <span class="font-mono text-xs text-gray-600">© 2025 <span id="footer-name">Username</span>. All rights reserved.</span>
+    <div class="flex items-center gap-1 font-mono text-xs text-gray-600">
+     <span class="inline-block w-2 h-2 rounded-full bg-cyber animate-pulse"></span> <span>SYSTEM ONLINE</span>
     </div>
    </div>
   </footer>
   <script>
-        // Mobile menu toggle
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        document.addEventListener('DOMContentLoaded', () => {
-                const button = document.getElementById('download-btn');
-                if (button) {
-                        button.addEventListener('click', () => {
-                        window.open('SUDHIR REDDY SURAM.pdf', '_blank');
-                    });
-                  }
-                });
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
+// Matrix rain
+(function() {
+  const bg = document.getElementById('matrix-bg');
+  const chars = '01アイウエオカキクケコサシスセソ';
+  for (let i = 0; i < 20; i++) {
+    const col = document.createElement('div');
+    col.className = 'matrix-col';
+    col.style.left = Math.random() * 100 + '%';
+    col.style.animationDuration = (8 + Math.random() * 12) + 's';
+    col.style.animationDelay = Math.random() * 10 + 's';
+    col.style.opacity = (0.05 + Math.random() * 0.15);
+    let t = '';
+    for (let j = 0; j < 20; j++) t += chars[Math.floor(Math.random() * chars.length)] + ' ';
+    col.textContent = t;
+    bg.appendChild(col);
+  }
+})();
 
-        // Smooth scrolling function
-        function scrollToSection(sectionId) {
-            const element = document.getElementById(sectionId);
-            if (element) {
-                element.scrollIntoView({ 
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
-        }
+// Mobile menu
+document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+  document.getElementById('mobile-menu').classList.toggle('hidden');
+});
+document.querySelectorAll('#mobile-menu a').forEach(a => {
+  a.addEventListener('click', () => document.getElementById('mobile-menu').classList.add('hidden'));
+});
 
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href').substring(1);
-                scrollToSection(targetId);
-                
-                // Close mobile menu if open
-                mobileMenu.classList.add('hidden');
-            });
-        });
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) t.scrollIntoView({ behavior: 'smooth' });
+  });
+});
 
-        // Add scroll effect to navbar
-        window.addEventListener('scroll', () => {
-            const navbar = document.querySelector('nav');
-            if (window.scrollY > 100) {
-                navbar.classList.add('bg-opacity-95');
-            } else {
-                navbar.classList.remove('bg-opacity-95');
-            }
-        });
+// Active nav highlight
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('[data-nav]');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navLinks.forEach(l => l.classList.remove('active'));
+      document.querySelectorAll(`[href="#${entry.target.id}"]`).forEach(l => l.classList.add('active'));
+    }
+  });
+}, { threshold: 0.3 });
+sections.forEach(s => observer.observe(s));
 
-        // Toggle credential visibility
-        function toggleCredential(certId) {
-            const certElement = document.querySelector(`[data-cert="${certId}"]`);
-            if (certElement) {
-                certElement.classList.toggle('hidden');
-            }
-        }
+// Intersection fade-in
+const fadeObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('fade-up'); fadeObserver.unobserve(e.target); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.terminal-card, .project-card').forEach(el => fadeObserver.observe(el));
 
-        // Project details toggle functionality
-        //function toggleProjectDetails(projectId) {
-            const detailsSection = document.getElementById('project-details');
-            const allDetails = document.querySelectorAll('.project-detail-content');
-            const projectDetails = document.getElementById(projectId + '-details');
-            
-            // Hide all project details first
-            allDetails.forEach(detail => detail.classList.add('hidden'));
-            
-            // Show the selected project details
-            projectDetails.classList.remove('hidden');
-            detailsSection.classList.remove('hidden');
-            
-            // Scroll to the details section
-            detailsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        //}
-        
-        function closeProjectDetails() {
-            const detailsSection = document.getElementById('project-details');
-            detailsSection.classList.add('hidden');
-            
-            // Scroll back to projects section
-            document.getElementById('projects').scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
+// Element SDK
+const defaultConfig = {
+  hero_name: 'Username',
+  hero_tagline: 'Security Analyst & Network Engineer',
+  summary_text: 'Network Enthusiast professional with Master\'s in Cybersecurity (GPA 4.0) and hands-on experience in log analysis, penetration testing, and network operations.',
+  contact_email: 'user@gmail.com',
+  contact_phone: '+1 (111)-(111)-1111',
+  contact_location: 'city, state',
+  background_color: '#050505',
+  surface_color: '#0a0a0a',
+  text_color: '#d1d5db',
+  primary_action_color: '#0BDA51',
+  secondary_action_color: '#888888',
+  font_family: 'JetBrains Mono',
+  font_size: 16
+};
 
-        // Animate skill bars on scroll
-        const observerOptions = {
-            threshold: 0.5,
-            rootMargin: '0px 0px -100px 0px'
+function applyConfig(config) {
+  const c = { ...defaultConfig, ...config };
+
+  document.getElementById('hero-name').textContent = c.hero_name;
+  document.getElementById('nav-name').textContent = c.hero_name.toUpperCase();
+  document.getElementById('footer-name').textContent = c.hero_name;
+  document.getElementById('hero-tagline').textContent = c.hero_tagline;
+  document.getElementById('hero-summary').textContent = c.summary_text;
+  document.getElementById('hero-email').textContent = c.contact_email;
+  document.getElementById('hero-phone').textContent = c.contact_phone;
+  document.getElementById('hero-location').textContent = c.contact_location;
+  document.getElementById('contact-email').textContent = c.contact_email;
+  document.getElementById('contact-phone').textContent = c.contact_phone;
+  document.getElementById('contact-location').textContent = c.contact_location;
+
+  // Colors
+  document.body.style.backgroundColor = c.background_color;
+  document.querySelectorAll('.terminal-card').forEach(el => el.style.backgroundColor = c.surface_color);
+  document.body.style.color = c.text_color;
+
+  // Font
+  const ff = c.font_family + ', JetBrains Mono, monospace';
+  document.querySelectorAll('.font-mono').forEach(el => el.style.fontFamily = ff);
+  document.getElementById('hero-name').style.fontFamily = ff;
+
+  // Font size
+  const bs = c.font_size;
+  document.getElementById('hero-name').style.fontSize = (bs * 3.5) + 'px';
+  document.getElementById('hero-tagline').style.fontSize = (bs * 1.25) + 'px';
+  document.getElementById('hero-summary').style.fontSize = bs + 'px';
+}
+
+if (window.elementSdk) {
+  window.elementSdk.init({
+    defaultConfig,
+    onConfigChange: async (config) => applyConfig(config),
+    mapToCapabilities: (config) => {
+      const c = { ...defaultConfig, ...config };
+      function mut(key) {
+        return {
+          get: () => c[key] || defaultConfig[key],
+          set: (v) => { c[key] = v; window.elementSdk.setConfig({ [key]: v }); }
         };
+      }
+      return {
+        recolorables: [mut('background_color'), mut('surface_color'), mut('text_color'), mut('primary_action_color'), mut('secondary_action_color')],
+        borderables: [],
+        fontEditable: mut('font_family'),
+        fontSizeable: { get: () => c.font_size || defaultConfig.font_size, set: (v) => { c.font_size = v; window.elementSdk.setConfig({ font_size: v }); } }
+      };
+    },
+    mapToEditPanelValues: (config) => {
+      const c = { ...defaultConfig, ...config };
+      return new Map([
+        ['hero_name', c.hero_name],
+        ['hero_tagline', c.hero_tagline],
+        ['summary_text', c.summary_text],
+        ['contact_email', c.contact_email],
+        ['contact_phone', c.contact_phone],
+        ['contact_location', c.contact_location]
+      ]);
+    }
+  });
+}
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const skillBars = entry.target.querySelectorAll('.skill-bar');
-                    skillBars.forEach(bar => {
-                        bar.style.animation = 'fillBar 2s ease-in-out';
-                    });
-                }
-            });
-        }, observerOptions);
-
-        const skillSection = document.querySelector('#skills');
-        if (skillSection) {
-            observer.observe(skillSection);
-        }
-    </script>
-    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'969424c40286cd7f',t:'MTc1NDIwNjU4Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a8f541c048c427f',t:'MTc2NDg5MzUxMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+lucide.createIcons();
+</script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9f180982b1ef2ef5',t:'MTc3NzA2NDQyMi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
-
-
-
